@@ -96,5 +96,3 @@ Booking.all.each do |bk|
                  rt_performance: rand(1..5),
                  rt_owner: rand(1..5))
 end
-
-byebug
