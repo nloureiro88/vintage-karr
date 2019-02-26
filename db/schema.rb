@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_02_25_165738) do
     t.bigint "car_id"
     t.bigint "driver_id"
     t.string "purpose"
-    t.string "status"
+    t.string "status", default: "created"
     t.time "bk_start"
     t.time "bk_end"
     t.datetime "created_at", null: false
