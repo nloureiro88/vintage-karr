@@ -7,8 +7,15 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.2.2'
 gem 'redis'
-gem 'faker'
+
+# Our gems
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'devise'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'cloudinary', '~> 1.9.1'
+gem 'carrierwave', '~> 1.2'
+
+# --------
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
