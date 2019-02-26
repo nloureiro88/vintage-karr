@@ -1,2 +1,67 @@
 <h1>Cars#show</h1>
 <p>Find me in app/views/cars/show.html.erb</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1><%#= @car.brand %></h1>
+      <%#= link_to "Back to all cocktails", root_path %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h3>Recipe</h3>
+      <table class="table table-bordered">
+        <tbody>
+          <thead>
+            <th>Ingredient</th>
+            <th>Description</th>
+            <th>Action</th>
+          </thead>
+          <%# @cocktail.doses.each do |dose| %>
+            <tr>
+              <td><%#= dose.ingredient.name %></td>
+              <td><%#= dose.description %></td>
+              <td>
+                <%#= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <i class="fa fa-trash destroy_dose"></i>
+                <%# end %>
+              </td>
+            </tr>
+          <%# end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <%#= render "doses/new", cocktail: @cocktail, dose: @dose %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Reviews</h3>
+      <%# if @cocktail.reviews.empty? %>
+        <p>Be the first to let a review</p>
+      <%# else %>
+        <ul class="list-group">
+          <%# @cocktail.reviews.each do |review| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span class="badge badge-primary badge-pill">
+                <%# counter = 0 %>
+                <%# 5.times do %>
+                  <i class="fa <%#= review.rating > counter ? 'fa-star' : 'fa-star-o' %>"></i>
+                  <%# counter += 1 %>
+                <%# end %>
+              </span>
+              <%#= review.content %>
+            </li>
+          <%# end %>
+        </ul>
+      <%# end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <%#= render "reviews/new", cocktail: @cocktail, review: @review %>
+    </div>
+  </div>
+</div>
