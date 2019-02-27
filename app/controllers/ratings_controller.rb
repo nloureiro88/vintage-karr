@@ -1,7 +1,4 @@
 class RatingsController < ApplicationController
-  def index
-  end
-
   def new
   end
 

@@ -1,13 +1,10 @@
 class BookingsController < ApplicationController
-  def index
-  end
-
   def new
   end
 
   def create
   end
 
-  def destroy
+  def destroy # only if status "created"
   end
 end
