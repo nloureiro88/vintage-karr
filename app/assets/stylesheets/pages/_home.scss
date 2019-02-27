@@ -1,1 +1,22 @@
-// Specific CSS for your home-page
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #141414;
+  margin: 0px;
+  padding: 0px;
+}
+.card{
+  padding: 10px;
+  font-weight: 300;
+}
+.card h2{
+  font-size: 20px;
+}
+.padded {
+  padding-top: 8em;
+  padding-bottom: 8em;
+}
+.blue-bg {
+  background: #cf3030;
+  color: white;
+}
