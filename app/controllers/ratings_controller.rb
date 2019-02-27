@@ -1,12 +1,9 @@
 class RatingsController < ApplicationController
-  before_action :authenticate_user!
-
-  def index
-  end
-
   def new
+    authorize @rating
   end
 
   def create
+    authorize @rating
   end
 end

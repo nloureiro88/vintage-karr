@@ -10,15 +10,18 @@ require 'open-uri'
 require 'nokogiri'
 require 'csv'
 
+puts "Destroying all existing data..."
+
+Booking.destroy_all
 User.destroy_all
 Car.destroy_all
-Booking.destroy_all
 Rating.destroy_all
 
 filepath_users = './db/users.csv'
 filepath_cars = './db/cars.csv'
 
 # Get car images from rotten tomatoes
+puts "Getting car images from rotten tomatoes..."
 
 html_file = open("https://editorial.rottentomatoes.com/article/Total-Recall-50-Most-Memorable-Movie-Cars/").read
 html_doc = Nokogiri::HTML(html_file)
@@ -29,27 +32,19 @@ html_doc.search('table tr td p>img').each do |element|
 end
 
 # Create users
+puts "Creating users from Le Wagon batch..."
 
 csv_options = { col_sep: ';' }
 CSV.foreach(filepath_users, csv_options) do |row|
   User.create!(name: row[0],
-               email: row[0].downcase.tr(" ", ".") + "@lewagon.com",
                password: "12345678",
+               email: row[0].downcase.tr(" ", ".") + "@lewagon.com",
                address: row[1],
                photo: row[2])
 end
 
-# Get car images
-
-html_file = open("https://editorial.rottentomatoes.com/article/Total-Recall-50-Most-Memorable-Movie-Cars/").read
-html_doc = Nokogiri::HTML(html_file)
-
-car_images = []
-html_doc.search('table tr td p>img').each do |element|
-  car_images << element.attributes["src"].value
-end
-
 # Create cars
+puts "Creating cars from Rotten Tomatoes..."
 
 CAR_TYPES = ["Convertible", "Coupe", "Hatchback", "Luxury", "SUV", "Sedan", "Sports", "Truck", "Van", "Wagon"]
 FUEL_TYPES = ["Bio-diesel", "Diesel", "Ethanol", "Gasoline", "Natural Gas", "Propane"]
@@ -58,7 +53,7 @@ PURPOSES = ["Competition", "Showing", "Tourism", "Wedding", "Other Event"]
 i = 0
 csv_options = { col_sep: ';' }
 CSV.foreach(filepath_cars, csv_options) do |row|
-  Car.create!(owner: User.find(1 + i/5.floor), # 5 cars for each of the first 10 users
+  Car.create!(owner: User.all.sample,
               brand: row[0],
               model: row[1],
               year: row[2].to_i,
@@ -74,10 +69,11 @@ CSV.foreach(filepath_cars, csv_options) do |row|
 end
 
 # Create random bookings
+puts "Creating random bookings..."
 
 User.all.each do |driver_user|
   3.times do
-    Booking.create!(car: Car.find(rand(1..Car.count)), #random car
+    Booking.create!(car: Car.all.sample, #random car
                    driver: driver_user,
                    purpose: PURPOSES[rand(0..PURPOSES.length - 1)],
                    status: "created", # to be changed for bookings
@@ -88,6 +84,7 @@ end
 
 # Add 1 rating per booking
 # to be changed for ratings
+puts "Creating ratings for bookings..."
 
 Booking.all.each do |bk|
   Rating.create!(booking: bk,
@@ -96,3 +93,5 @@ Booking.all.each do |bk|
                  rt_performance: rand(1..5),
                  rt_owner: rand(1..5))
 end
+
+puts "Seeds done!!!"
