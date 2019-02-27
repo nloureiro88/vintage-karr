@@ -1,0 +1,108 @@
+
+.card {
+  height: 250px;
+  width: 300px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  //background-size: cover !important;
+  // background-position: center;
+  color: white;
+  position: relative;
+  background-color: grey;
+  margin-bottom: 3rem;
+  background-color: lightgrey;
+  border: 2px solid red;
+  border-radius: 15px;
+  box-shadow: -2px 2px 3px blue;
+
+
+}
+
+
+.card-header {
+  height: 25%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  // background-color: lightgrey;
+}
+
+.card-header h2 {
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 24px;
+  color: red;
+  margin-bottom: 0px;
+}
+
+
+.card-header p {
+  margin-top: 0px;
+  margin-left: 10px;
+  font-size: 14px;
+  color: red;
+}
+
+.card-footer {
+  height: 15%;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  // background-color: lightgrey;
+
+  display: flex;
+  justify-content: space-between;
+  //align-items: center;
+
+  padding: 10px;
+  font-size: 14px;
+  color: red;
+}
+
+.card-price{
+  position: absolute;
+  left: 0px;
+  top: -100%;
+  height: 25px;
+  width: 50px;
+  background-color: black;
+  color: yellow;
+}
+
+.card-gallery {
+  height: 60%;
+  width: 100%;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background-size: cover !important;
+  background-position: center;
+  color: white;
+  position: absolute;
+  top: 25%;
+
+  //background-color: green;
+  //padding: 50px;
+}
+
+// .card-description {
+//   position: absolute;
+//   bottom: 10px;
+//   left: 10px;
+// }
+// .card-description h2 {
+//   font-size: 24px;
+//   color: red;
+// }
+// .card-link {
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   right: 0;
+//   width: 100%;
+//   z-index: 2;
+//   background: black;
+//   opacity: 0;
+// }
+// .card-link:hover {
+//   opacity: 0.1;
+// }
+

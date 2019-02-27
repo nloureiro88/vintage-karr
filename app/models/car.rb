@@ -2,7 +2,7 @@ class Car < ApplicationRecord
   belongs_to :owner, class_name: "User"
   has_many :bookings
   has_many :reviews, through: :bookings
-
+  
   validates :brand, presence: true, allow_blank: false
   validates :model, presence: true, allow_blank: false
   validates :car_type, presence: true, inclusion: { in: ["Convertible", "Coupe", "Hatchback", "Luxury", "SUV", "Sedan", "Sports", "Truck", "Van", "Wagon"] }
