@@ -5,8 +5,8 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.references :driver, index: true, foreign_key: { to_table: :users }
       t.string :purpose
       t.string :status, default: "created"
-      t.time :bk_start
-      t.time :bk_end
+      t.date :bk_start
+      t.date :bk_end
 
       t.timestamps
     end

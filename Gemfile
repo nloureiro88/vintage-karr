@@ -9,10 +9,13 @@ gem 'rails', '5.2.2'
 gem 'redis'
 
 # Our gems
+
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'devise'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
+gem 'nokogiri'
+gem "pundit"
 
 # --------
 
