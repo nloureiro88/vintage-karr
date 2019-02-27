@@ -1,8 +1,64 @@
-<h1>Cars#index</h1>
-<p>Find me in app/views/cars/index.html.erb</p>
+
+<h2>Take a ride on your dream KARR</h2>
+
+<div class="row">
+    <% @cars.each do |car| %>
+      <div class="card-container col-xs-12 col-sm-6 col-md-4">
+        <div class="car-card">
+
+          <div class="car-background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
+            <div class="car-card-header">
+              <h3><%= car.brand %></h3>
+              <p><%= car.model %></p>
+            </div>
+          </div>
+
+          <div class="car-card-price">
+            <p><%= car.price.to_i %></p>
+            <p class="smaller">€/day</p>
+          </div>
+
+          <div class="rating-holder">
+            <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
+              <button>1</button>
+              <button>2</button>
+              <button>3</button>
+              <button>4</button>
+              <button>5</button>
+            </div>
+          </div>
+
+          <div class="car-card-footer-left">
+            <p><i class="fas fa-map-marker-alt"></i> <%= car.owner.address %></p>
+          </div>
+
+          <div class="car-card-footer-right">
+            <p><i class="fas fa-industry"></i> <%= car.year %></p>
+            <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(car.mileage, :delimiter => '.') %> km</p>
+          </div>
+
+          <%= link_to "", car_path(car) %>
+
+        </div>
+      </div>
+  <% end %>
+</div>
 
 
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path 'car1.jpg' %>');">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path 'car1.jpg' %>');">
   <div class="banner-content">
     <h1>Vintage Cars</h1>
     <p>Take a ride on your dream's car</p>
@@ -10,13 +66,9 @@
   </div>
 </div>
 
-
-
-<h1>VERSION #1</h1>
-
 <div class="input-group">
-  <!--  <form class="form-inline" action=""> -->
-    <input type="text" class="form-control search-form"
+  <form class="form-inline" action=""> -->
+    <!-- <input type="text" class="form-control search-form"
      placeholder="Search localization">
      <span class="input-group-btn">
      <input type="date" class="form-control"
@@ -25,69 +77,7 @@
        <button type="submit"
        class="btn search-btn" data-target="#search-form"
        name="q">
-         <i class="fa fa-search"><!--FONT AWESOME font @
+         <i class="fa fa-search">FONT AWESOME font @
          "http://fortawesome.github.io/Font-Awesome/" --></i>
-       </button>
-     </span>
+
      <!--  </form> -->
-   </div>
-
-
-<br>
-<br>
-
-    <div class="row">
-      <% @cars.each do |car| %>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-
-        <div class="card">
-            <div class="card-header">
-                <h2><%= car.brand %></h2>
-                <p>Modelo<%= car.model %></p>
-
-            </div>
-            <div class="rating-holder">
-                <div class="c-rating c-rating--small" data-rating-value="4">
-                  <button>1</button>
-                  <button>2</button>
-                  <button>3</button>
-                  <button>4</button>
-                  <button>5</button>
-                </div>
-            </div>
-
-            <div class="card-gallery" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path 'car2.jpg', width: 400, height: 500, crop: :fill %>');">
-            </div>
-
-                    <!-- <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%#= cl_image_path car1.photo, width: 400, height: 500, crop: :fill %>');">
-                     -->
-
-              <div class="card-footer">
-
-                        <p class="card-price">Price: <%= car.price %></p>
-                        <p>Year:<%= car.year %></p>
-                        <i class="fas fa-band-aid"></i>
-                        <%= link_to "Flip", "", class: 'card-link' %>
-                        <%= link_to "Car", car_path(car), class: 'card-link' %>
-              </div>
-
-  <!-- FLIPhorizontal -->
-              <!-- <div class="flip card-gallery">
-                  <div class="front" style="background-image: url('<%= image_path 'car2.jpg', width: 400, height: 500, crop: :fill %>')">
-                     <h1 class="text-shadow"><%= car.brand %></hi>
-                         <p class="card-price2">Price: <%= car.price %></p>
-                  </div>
-                  <div class="back">
-                     <h2>Price: <%= car.price %></h2>
-                     <p>Good tools make application development quicker and easier to maintain than if you did everything by hand..</p>
-                  </div>
-
-              </div>
- -->
-
-
-        </div>
-
-        </div>
-      <% end %>
-    </div>
