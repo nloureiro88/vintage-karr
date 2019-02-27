@@ -1,4 +1,4 @@
-h2 {
+.container h2 {
   margin: 40px auto;
   font-size: 48px;
   text-align: center;
@@ -15,12 +15,12 @@ h2 {
 
 .car-card {
   height: 210px;
-  width: 290px;
+  width: 320px;
   position: relative;
   background-color: white;
   border: 1px solid $vk-gray;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px $vk-gray;
+  box-shadow: 1px 1px 1px gray;
   margin: 20px auto;
   transition: all 1s ease;
 }
