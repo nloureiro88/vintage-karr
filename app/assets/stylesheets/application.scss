@@ -18,14 +18,17 @@
 //
 
 body {
-  background-color: linear-gradient(rgba(0,0,0,0.8), rgba(128,128,128,0.9));
+  background-color: white;
   font-family: $body-font;
+  min-height: 100vh;
+  letter-spacing: 1px;
 }
 
 .btn-primary {
   background-color: $vk-orange;
   border: none;
   border-radius: 5px;
+  padding: 10px;
 
   &:hover{
     background-color: $vk-red;

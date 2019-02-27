@@ -1,34 +1,69 @@
-<div class="car-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= @car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center">
+<div class="container">
 
-  <div class="car-info">
-    <p><i class="far fa-grin-stars"></i> <%= @car.car_type %></p>
-    <p><i class="fas fa-gas-pump"></i> <%= @car.fuel_type %></p>
-    <p><i class="fas fa-industry"></i> <%= @car.year %></p>
-    <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(@car.mileage, :delimiter => '.') %> km</p>
+  <div class="row">
+
+    <div class="car-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= @car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center">
+
+      <div class="car-info">
+        <p><i class="far fa-grin-stars"></i> <%= @car.car_type %></p>
+        <p><i class="fas fa-gas-pump"></i> <%= @car.fuel_type %></p>
+        <p><i class="fas fa-industry"></i> <%= @car.year %></p>
+        <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(@car.mileage, :delimiter => '.') %> km</p>
+      </div>
+
+      <div class="car-name">
+        <h2><%= @car.brand %></h2>
+      </div>
+
+      <div class="car-price">
+        <p><%= @car.price.to_i %></p>
+        <p class="smaller">€/day</p>
+      </div>
+
+      <% user_rtg = @car.owner.ratings.count(:rt_owner).zero? ? 0 : (@car.owner.ratings.sum(:rt_owner) / @car.owner.ratings.count(:rt_owner).to_f).round(0)%>
+      <div class="user-info">
+        <%= image_tag @car.owner.photo %>
+        <div class="user-rating">
+          <div class="c-rating c-rating--small" data-rating-value="<%= user_rtg %>">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+          </div>
+        </div>
+        <p><%= @car.owner.name %></p>
+        <p><i class="fas fa-map-marker-alt"></i> <%= @car.owner.address %></p>
+      </div>
+    </div>
+
   </div>
 
-  <div class="car-name">
-    <h2><%= @car.brand %></h2>
-    <p><%= @car.model %></p>
+  <div class="row">
+
+    <div class="card-bottom">
+      <div class="car-info col-xs-12 col-sm-6 col-md-2">
+        <p><strong><%= @car.model %></strong></p>
+        <p><i class="fas fa-truck-pickup"></i> <%= @car.car_type %></p>
+        <p><i class="fas fa-gas-pump"></i> <%= @car.fuel_type %></p>
+        <p><i class="fas fa-industry"></i> <%= @car.year %></p>
+        <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(@car.mileage, :delimiter => '.') %> km</p>
+      </div>
+
+      <div class="car-desc col-xs-12 col-sm-6 col-md-6">
+        <p><%= @car.description %></p>
+      </div>
+
+      <div class="booking-form col-xs-12 col-sm-12 col-md-4">
+        <%= simple_form_for @booking do |f| %>
+          <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory' %>
+          <%= f.input :bk_start, as: :date, start_day: Date.today + 2, end_day: @car.date_end %>
+          <%= f.input :bk_end, as: :date, start_day: Date.today + 2, end_day: @car.date_end %>
+          <%= f.button :submit, "Book now!", class: "btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
-  <div class="car-price">
-    <p><%= @car.price.to_i %></p>
-    <p class="smaller">€/day</p>
-  </div>
-
-  <div class="user-info">
-    <%= image_tag @car.owner.photo %>
-    <p><%= @car.owner.name %></p>
-    <p><i class="fas fa-map-marker-alt"></i> <%= @car.owner.address %></p>
-  </div>
-</div>
-
-<div class="card-bottom">
-  <div class="car-desc">
-    <p><%= @car.description %></p>
-  </div>
-
-  <div class="booking-form">
-  </div>
 </div>

@@ -11,7 +11,7 @@
   letter-spacing: 1px;
 }
 .home-card h2{
-  font-size: 20px;
+  font-size: 30px;
   color: white;
 }
 .padded {
@@ -19,6 +19,9 @@
   padding-bottom: 8em;
 }
 .blue-bg {
-  background: #cf3030;
+  background: $vk-orange;
   color: white;
+}
+.newsletter {
+  background-color: white;
 }
