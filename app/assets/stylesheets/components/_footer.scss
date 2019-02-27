@@ -1,0 +1,48 @@
+footer {
+  bottom: 0;
+  background: $vk-black;
+  padding: 30px 50px;
+  color: $vk-gray;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+
+  ul {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: $vk-orange;
+    text-decoration: none;
+    transition: color 0.5s ease;
+
+    &:hover {
+      color: $vk-red;
+    }
+  }
+}
+
+footer .icons {
+  min-width: 100px;
+  margin-right: 20px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+
+  i {
+    margin: 0;
+    padding: 0 10px;
+  }
+}
+
+footer .copyright {
+  a {
+    color: $vk-orange;
+    text-decoration: none;
+    transition: color 0.5s ease;
+
+    &:hover {
+      color: $vk-red;
+    }
+  }
+}

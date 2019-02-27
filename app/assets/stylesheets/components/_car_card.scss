@@ -1,9 +1,14 @@
+.container {
+  margin-bottom: 50px;
+}
+
 .container h2 {
   margin: 40px auto;
   font-size: 48px;
   text-align: center;
   font-family: $headers-font;
-  color: $vk-red;
+  color: $vk-orange;
+  text-shadow: 0.5px 0.5px 0.5px $vk-gray;
 }
 
 .card-container {
@@ -89,7 +94,7 @@
   border-radius: 50%;
   text-align: center;
   background-color: white;
-  color: $vk-red;
+  color: $vk-orange;
   font-size: 14px;
 }
 
@@ -123,7 +128,7 @@
   }
 
   .car-card-price {
-    background-color: $vk-red;
+    background-color: $vk-orange;
     color: white;
   }
 
@@ -132,9 +137,9 @@
   }
 
   .car-background .car-card-header {
-    color: $vk-red;
+    color: $vk-orange;
     h3 {
-      color: $vk-red;
+      color: $vk-orange;
     }
   }
 }
