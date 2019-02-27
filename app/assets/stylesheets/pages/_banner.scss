@@ -1,0 +1,31 @@
+#banner {
+
+  background-image: linear-gradient(rgba(100,100,100,0.4), rgba(100,100, 100,0.9)), url(http://www.knightridercompanion.com/www/wp-content/uploads/2017/04/KARR_SK_WEB.jpg);
+  color: white;
+  padding: 150px 0;
+  background-size: cover;
+  height: 650px;
+}
+
+#banner h1 {
+  font-size: 40px;
+  color: white;
+}
+
+#banner p {
+  font-size: 25px;
+  font-weight: 100;
+}
+
+// Possible feature to add, don't delete .video
+
+// .video {
+//  // position: fixed;
+//  // top: 50%; left: 50%;
+//  z-index: 1;
+//  // min-width: 100%;
+//  // min-height: 100%;
+//  width: auto;
+//  height: 650px;
+//  // transform: translate(-50%, -50%);
+// }
