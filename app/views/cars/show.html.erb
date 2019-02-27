@@ -1,30 +1,88 @@
 <h1>Cars#show</h1>
 <p>Find me in app/views/cars/show.html.erb</p>
 
+<!--  ******************* BANNER *************************-->
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path 'car1.jpg' %>');">
+  <div class="banner-content">
+    <h1><%= @car.brand %></h1>
+    <p>
+      <%= @car.brand %>
+      <%= @car.brand %>
+      <%= @car.brand %>
+      <%= @car.brand %>
+    </p>
+   <%= link_to "Book now", new_car_path, class: "btn btn-primary btn-sm" %>
+  </div>
+</div>
+
 <div class="container">
-  <div class="row">
+    <div class="card">
+        <div class="card-block">
+          <i class="fa fa-check" style="color:black">Checked</i>
+          <i class="fas fa-bomb" style="color:black">Velocidade</i>
+          <i class="fas fa-bomb" style="color:black">Passengers</i>
+          <i class="fas fa-bomb" style="color:black">Milleage</i>
+          <i class="fas fa-bomb" style="color:black">Fuel</i>
+          <img src="url('<%= image_path 'car1.jpg' %>')" alt="Avatar">
+</div>
+</div>
+</div>
+
+<!--  ****************** AVATAR **************** -->
+
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front"
+    style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 10%), url(https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;">
+      <!-- <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg" alt="Avatar" > -->
+    </div>
+
+    <div class="flip-card-back">
+      <h5>John Doe</h5>
+      <p>john.doe@gmail.com</p>
+      <p>+ 351 964 388 389</p>
+    </div>
+  </div>
+</div>
+
+<!-- // ****************** CAR IMAGE **************** -->
+
+<div class="card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path 'car1.jpg' %>');">
+</div>
+
+
+<!-- <div class="container"> -->
+  <div class="row" style="background-color: red">
     <div class="col-xs-12">
-      <h1><%#= @car.brand %></h1>
+      <h1><%= @car.brand %></h1>
+      <h1>M:<%= @car.model %></h1>
+      <h1>Y:<%= @car.year %></h1>
+      <h1>€:<%= @car.price %></h1>
       <%#= link_to "Back to all cocktails", root_path %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <h3>Recipe</h3>
+  <div class="row" style="background-color: blue">
+    <div class="col-sm-6 col-md-6">
+      <h3>Classic Car</h3>
       <table class="table table-bordered">
         <tbody>
           <thead>
-            <th>Ingredient</th>
-            <th>Description</th>
-            <th>Action</th>
+            <th>Label</th>
+            <th>Model</th>
+            <th>Year</th>
+             <th>Label</th>
+            <th>Model</th>
+            <th>Year</th>
           </thead>
-          <%# @cocktail.doses.each do |dose| %>
+          <%# @car.bookings.each do |dose| %>
             <tr>
-              <td><%#= dose.ingredient.name %></td>
-              <td><%#= dose.description %></td>
+              <td><%#= car.booking.driver %></td>
+              <td><%#= car.description %></td>
               <td>
-                <%#= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
-                  <i class="fa fa-trash destroy_dose"></i>
+                <%#= link_to booking_path(booking), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <i class="fa fa-trash destroy_booking"></i>
                 <%# end %>
               </td>
             </tr>
@@ -36,7 +94,7 @@
       <%#= render "doses/new", cocktail: @cocktail, dose: @dose %>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="background-color: green">
     <div class="col-xs-12">
       <h3>Reviews</h3>
       <%# if @cocktail.reviews.empty? %>
@@ -59,9 +117,49 @@
       <%# end %>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="background-color: yellow">
     <div class="col-xs-12">
       <%#= render "reviews/new", cocktail: @cocktail, review: @review %>
     </div>
   </div>
-</div>
+
+
+    <div class="container text-center">
+      <div class="card_dash">
+        <div class="card-content">
+          <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg" alt="" width="150" class="img-circle">
+          <h2>Sebastien Saunier</h2>
+          <p>CTO at Le Wagon</p>
+          <a href="#" class="btn btn-primary btn-lg">Get in touch</a>
+        </div>
+      </div>
+      <div class="card_dash">
+        <div class="card-content">
+          <img src=url('<%= image_path 'car1.jpg' %>')>
+          <h3>3,536</h3>
+          <p>contributions</p>
+        </div>
+      </div>
+      <div class="card_dash">
+        <div class="card-content">
+          <h3>758</h3>
+          <p>followers</p>
+        </div>
+      </div>
+      <div class="card_dash">
+        <div class="card-content">
+          <h3>119</h3>
+          <p>repositories</p>
+        </div>
+      </div>
+      <div class="card_dash">
+        <div class="card-content">
+          <h3>More about Sebastien</h3>
+          <p class="text-justify">
+            I am a full-stack developer with 9 years of experience working in startups. Scratching your own itch? Working on a startup project? Lots of ideas but frustrated that you can't code them? Confused with agencies' or freelances' quotes? No clue when a developer is talking? Time to learn to code with Le Wagon with a 9-week intensive and immersive bootcamp!
+          </p>
+        </div>
+      </div>
+    </div>
+
+<!-- </div> -->
