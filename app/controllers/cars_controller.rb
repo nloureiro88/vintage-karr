@@ -1,23 +1,24 @@
 class CarsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :find_owner, only: %i[new create]
   before_action :set_car, only: %i[show edit update]
 
   def index
-    @cars = Car.all
+    @cars = policy_scope(Car).all
   end
 
   def show
+    authorize @car
     @booking = Booking.new
   end
 
   def new
     @car = Car.new
+    authorize @car
   end
 
   def create
     @car = Car.new(car_params)
-    @car.owner = @owner
+    @car.owner = current_user
+    authorize @car
     if @car.save
       redirect_to @car
     else
@@ -25,10 +26,12 @@ class CarsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @car
+  end
 
   def update
-    @car.owner = @owner
+    authorize @car
     if @car.update(car_params)
       redirect_to @car
     else
@@ -42,14 +45,10 @@ class CarsController < ApplicationController
     @car = Car.find(params[:id])
   end
 
-  def find_owner
-    @owner = Owner.find(params[:owner_id])
-  end
-
   def car_params
-    params.require(:car).permit(:owner_id, :brand, :model,
+    params.require(:car).permit(:brand, :model,
                                 :car_type, :fuel_type, :description,
                                 :car_photo, :year, :mileage,
-                                :for_rental, :price, :date_start, :date_end)
+                                :price, :date_start, :date_end)
   end
 end
