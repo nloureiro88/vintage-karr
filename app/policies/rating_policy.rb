@@ -10,6 +10,6 @@ class RatingPolicy < ApplicationPolicy
   end
 
   def create?
-    record.user == user || user.admin? # Only driver from ratings' booking if booking status "finished"
+    record.driver == user # || user.admin? # Only driver from ratings' booking if booking status "finished"
   end
 end

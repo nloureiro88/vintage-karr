@@ -18,11 +18,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :address, :photo])
   end
 
+  # Uncomment when you *really understand* Pundit!
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  def user_not_authorized
+    flash[:alert] = "Where are do you think you were going, beautiful beast?"
+    redirect_to(root_path)
+  end
+
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end
-
-# t.string "address"
-# t.date "birthdate"
-# t.string "photo"
