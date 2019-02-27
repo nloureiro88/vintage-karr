@@ -18,6 +18,16 @@
 //
 
 body {
-  background-color: linear-gradient($vk-gray, white);
+  background-color: linear-gradient(rgba(0,0,0,0.8), rgba(128,128,128,0.9));
   font-family: $body-font;
+}
+
+.btn-primary {
+  background-color: $vk-orange;
+  border: none;
+  border-radius: 5px;
+
+  &:hover{
+    background-color: $vk-red;
+  }
 }
