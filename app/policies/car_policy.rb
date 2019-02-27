@@ -26,6 +26,6 @@ class CarPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user || user.admin?
+    record.owner == user # || user.admin?
   end
 end

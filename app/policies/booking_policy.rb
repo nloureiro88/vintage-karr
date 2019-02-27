@@ -5,8 +5,8 @@ class BookingPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    create?
+  def index?
+    true
   end
 
   def create?
@@ -14,6 +14,6 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.user == user || user.admin? # Only driver from ratings' booking and if status "created"
+    record.driver == user # || user.admin?
   end
 end
