@@ -1,0 +1,32 @@
+form h1 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+form .btn {
+  width: 100%;
+  line-height: 30px;
+}
+form .subscribe-btn {
+  width: 100px;
+  margin: 20px;
+}
+
+
+.submit-button{
+     background: transparent;
+     background-color: $vk-orange;
+     border: 1px solid #e8e8e8;
+     display: block;
+     float: right;
+      font-weight: 400;
+      font-size: 1.4em; //font size does not change
+      display: block;
+      padding: 0px 4px 0px 4px; //modification doesn't show..
+      text-decoration: none;
+      &:hover {
+        background-color: $vk-red;
+      }
+  }
+
