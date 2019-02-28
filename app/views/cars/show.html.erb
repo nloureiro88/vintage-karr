@@ -22,7 +22,7 @@
 
       <% user_rtg = @car.owner.ratings.count(:rt_owner).zero? ? 0 : (@car.owner.ratings.sum(:rt_owner) / @car.owner.ratings.count(:rt_owner).to_f).round(0)%>
       <div class="user-info">
-        <%= image_tag @car.owner.photo %>
+        <%= cl_image_tag @car.owner.photo %>
         <div class="user-rating">
           <div class="c-rating c-rating--small" data-rating-value="<%= user_rtg %>">
             <button>1</button>
