@@ -1,20 +1,12 @@
 .car-banner {
   height: 500px;
   width: 100%;
-  margin: 40px auto;
+  margin: 0 auto;
+  margin-top: 40px;
   border: 1px solid white;
   border-radius: 5px;
   position: relative;
   filter: brightness(120%);
-
-  .car-info {
-    color: $vk-gray;
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 16px;
-    text-shadow: 2px 2px 2px $vk-black;
-  }
 
   .car-name {
     position: absolute;
@@ -22,15 +14,15 @@
     left: 30px;
 
     h2 {
-      color: white;
+      color: $vk-orange;
       letter-spacing: 3px;
       font-family: $headers-font;
-      text-shadow: 2px 2px 2px $vk-orange;
+      text-shadow: 2px 2px 2px $vk-black;
     }
 
     p {
       color: $vk-gray;
-      text-shadow: 2px 2px 2px $vk-black;
+      text-shadow: 1px 1px 1px $vk-black;
       font-size: 20px;
     }
   }
@@ -48,7 +40,6 @@
     width: 80px;
     padding: 10px;
     border-radius: 50%;
-    box-shadow: 0.5px 0.5px 0.5px $vk-black;
     font-weight: bold;
 
     p {
@@ -80,26 +71,15 @@
     transition: all 0.5s ease;
 
     .user-rating {
-      position: relative;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-contents: center;
-
-      .user-rating {
-        display: block;
-        button {
-          $rating-color-empty: black;
-          $rating-color-full: white;
-        }
-      }
+      font-size: 14px;
+      margin-bottom: 8px;
     }
 
     img {
       border-radius: 5px;
       height: 80px;
       width: 80px;
-      margin-bottom: 10px;
+      margin-bottom: 2px;
     }
 
     p:first-child {
@@ -127,6 +107,31 @@
   }
 }
 
+.car-circles {
+  color: gray;
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid $vk-gray;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  i {
+    padding-right: 1px;
+  }
+}
+
+.overall {
+  color: $vk-orange;
+}
+
+
 .card-bottom {
   position:relative;
   margin: 0 auto;
@@ -145,11 +150,29 @@
     color: $vk-orange;
   }
 
-  .btn-primary {
+  .btn-primary, .btn-secondary {
     width: 100%;
   }
 }
 
+.inline {
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    width: 90%;
+  }
+
+  .booking_bk_end {
+    float: right;
+  }
+}
+
+#total-price {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
 
 
 

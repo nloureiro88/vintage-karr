@@ -4,39 +4,80 @@
 
     <div class="car-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= @car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center">
 
-      <div class="car-info">
-        <p><i class="far fa-grin-stars"></i> <%= @car.car_type %></p>
-        <p><i class="fas fa-gas-pump"></i> <%= @car.fuel_type %></p>
-        <p><i class="fas fa-industry"></i> <%= @car.year %></p>
-        <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(@car.mileage, :delimiter => '.') %> km</p>
-      </div>
-
       <div class="car-name">
         <h2><%= @car.brand %></h2>
       </div>
 
       <div class="car-price">
-        <p><%= @car.price.to_i %></p>
+        <p id="price-day"><%= @car.price.to_i %></p>
         <p class="smaller">€/day</p>
       </div>
 
-      <% user_rtg = @car.owner.ratings.count(:rt_owner).zero? ? 0 : (@car.owner.ratings.sum(:rt_owner) / @car.owner.ratings.count(:rt_owner).to_f).round(0)%>
       <div class="user-info">
         <%= image_tag @car.owner.photo %>
         <div class="user-rating">
-          <div class="c-rating c-rating--small" data-rating-value="<%= user_rtg %>">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-          </div>
+
+          <% owner_rtg =  @car.owner.ratings.reject { |rating| rating.booking.driver == @car.owner } %>
+          <% user_rtg = owner_rtg.count.zero? ? 0 : (owner_rtg.pluck(:rt_owner).reduce(:+) / owner_rtg.count.to_f).round(0) %>
+
+          <% if user_rtg.zero? %>
+          <% else %>
+            <% (user_rtg).times do %>
+              <i class="fas fa-circle fa-xs"></i>
+            <% end %>
+            <% (5 - user_rtg).times do %>
+              <i class="far fa-circle fa-xs"></i>
+            <% end %>
+          <% end %>
+
         </div>
         <p><%= @car.owner.name %></p>
         <p><i class="fas fa-map-marker-alt"></i> <%= @car.owner.address %></p>
       </div>
     </div>
 
+  </div>
+
+  <div class="row">
+    <div class="car-circles">
+        <% if @car.ratings.count.zero? %>
+        <% else %>
+          <div class="rating">
+            <% rtg = (@car.ratings.sum(:rt_fun) / @car.ratings.count.to_f).round(0) %>
+            <p>
+              <% (rtg).times do %><i class="fas fa-circle fa-xs"></i><% end %><% (5 - rtg).times do %><i class="far fa-circle fa-xs"></i><% end %>
+               Fun
+            </p>
+          </div>
+
+          <div class="rating">
+            <% rtg = (@car.ratings.sum(:rt_condition) / @car.ratings.count.to_f).round(0) %>
+            <p>
+              <% (rtg).times do %><i class="fas fa-circle fa-xs"></i><% end %><% (5 - rtg).times do %><i class="far fa-circle fa-xs"></i><% end %>
+               Condition
+            </p>
+          </div>
+
+          <div class="rating">
+            <% rtg = (@car.ratings.sum(:rt_performance) / @car.ratings.count.to_f).round(0) %>
+            <p>
+              <% (rtg).times do %><i class="fas fa-circle fa-xs"></i><% end %><% (5 - rtg).times do %><i class="far fa-circle fa-xs"></i><% end %>
+               Performance
+            </p>
+          </div>
+
+          <div class="rating overall">
+            <% sum_rat = @car.ratings.sum(:rt_fun) + @car.ratings.sum(:rt_condition) + @car.ratings.sum(:rt_performance) + @car.ratings.sum(:rt_owner) %>
+            <% count_rat = @car.ratings.count %>
+            <% rat_calc = (sum_rat / (count_rat * 4).to_f).ceil %>
+
+            <p>
+              <% (rat_calc).times do %><i class="fas fa-circle fa-xs"></i><% end %><% (5 - rat_calc).times do %><i class="far fa-circle fa-xs"></i><% end %>
+               Overall
+            </p>
+          </div>
+        <% end %>
+      </div>
   </div>
 
   <div class="row">
@@ -55,11 +96,29 @@
       </div>
 
       <div class="booking-form col-xs-12 col-sm-12 col-md-4">
-        <%= simple_form_for @booking do |f| %>
-          <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory' %>
-          <%= f.input :bk_start, as: :date, start_day: Date.today + 2 %>
-          <%= f.input :bk_end, as: :date, start_day: Date.today + 2 %>
-          <%= f.button :submit, "Book now!", class: "btn-primary" %>
+        <%= simple_form_for [@car, @booking] do |f| %>
+
+          <% if @car.bookings.where("status = ? AND bk_start >= ?", "active", Date.today).count.positive? %>
+
+            <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory', label: 'Purpose', disabled: true %>
+            <div class="inline">
+              <%= f.input :bk_start, as: :string, input_html: {class: "booking-date"}, label: "Start", disabled: true %>
+              <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End", disabled: true  %>
+            </div>
+            <div id="total-price"><strong></strong></div>
+            <%= f.button :submit, "Already booked!", class: "btn-secondary", disabled: true %>
+
+          <% else %>
+
+            <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory', label: 'Purpose' %>
+            <div class="inline">
+              <%= f.input :bk_start, as: :string, input_html: {class: "booking-date"}, label: "Start" %>
+              <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End"  %>
+            </div>
+            <div id="total-price"><strong></strong></div>
+            <%= f.button :submit, "Book now!", class: "btn-primary" %>
+
+          <% end %>
         <% end %>
       </div>
     </div>

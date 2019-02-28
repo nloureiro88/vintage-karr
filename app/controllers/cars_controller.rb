@@ -3,11 +3,11 @@ class CarsController < ApplicationController
 
   def index
     if params[:query].present?
-      @cars = policy_scope(Car).global_search(params[:query]).where(for_rental: true)
+      @cars = policy_scope(Car).where(for_rental: true).order(:brand).global_search(params[:query])
     else
-      @cars = policy_scope(Car).where(for_rental: true)
+      @cars = policy_scope(Car).where(for_rental: true).order(:brand)
     end
-    @cars.order(:brand)
+    @cars = @cars.reject { |car| car.owner == current_user }
   end
 
   def show

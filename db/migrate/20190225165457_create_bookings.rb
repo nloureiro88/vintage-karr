@@ -4,7 +4,7 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.references :car, foreign_key: true
       t.references :driver, index: true, foreign_key: { to_table: :users }
       t.string :purpose
-      t.string :status, default: "created"
+      t.string :status, default: "active"
       t.date :bk_start
       t.date :bk_end
 
