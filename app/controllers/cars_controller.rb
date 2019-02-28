@@ -2,7 +2,12 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update]
 
   def index
-    @cars = policy_scope(Car).all
+    if params[:query].present?
+      @cars = policy_scope(Car).global_search(params[:query]).where(for_rental: true)
+    else
+      @cars = policy_scope(Car).where(for_rental: true)
+    end
+    @cars.order(:brand)
   end
 
   def show
