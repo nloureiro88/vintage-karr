@@ -2,13 +2,31 @@
   margin-bottom: 50px;
 }
 
-.container h2 {
-  margin: 40px auto;
-  font-size: 48px;
-  text-align: center;
-  font-family: $headers-font;
-  color: $vk-orange;
-  text-shadow: 0.5px 0.5px 0.5px $vk-gray;
+.container .search-form {
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+
+  input {
+    flex-grow: 1;
+  }
+
+  .btn-search {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    border: 1px solid $vk-orange;
+    border-radius: 5px;
+    color: $vk-orange;
+
+    &:hover {
+      border-color: $vk-red;
+      color: $vk-red;
+    }
+  }
 }
 
 .card-container {
@@ -72,7 +90,11 @@
 }
 
 .car-card-footer-left .ratings {
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+
+  strong {
+    color: $vk-orange;
+  }
 }
 
 .car-card-footer-left {
@@ -150,5 +172,9 @@
     h3 {
       color: $vk-orange;
     }
+  }
+
+  strong {
+    color: $vk-black;
   }
 }

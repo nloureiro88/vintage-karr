@@ -57,8 +57,8 @@
       <div class="booking-form col-xs-12 col-sm-12 col-md-4">
         <%= simple_form_for @booking do |f| %>
           <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory' %>
-          <%= f.input :bk_start, as: :date, start_day: Date.today + 2, end_day: @car.date_end %>
-          <%= f.input :bk_end, as: :date, start_day: Date.today + 2, end_day: @car.date_end %>
+          <%= f.input :bk_start, as: :date, start_day: Date.today + 2 %>
+          <%= f.input :bk_end, as: :date, start_day: Date.today + 2 %>
           <%= f.button :submit, "Book now!", class: "btn-primary" %>
         <% end %>
       </div>

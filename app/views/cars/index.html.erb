@@ -1,64 +1,71 @@
 <div class="container">
 
-      <%= form_tag cars_path, class: "form-inline", method: :get do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "Find a Karr by brand, model or location"
-        %>
+  <div class="row">
+    <%= form_tag cars_path, class: "search-form", method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a Karr by brand, model, owner or location"
+      %>
+      <%= button_tag(type: 'submit', class: "btn btn-search") do %>
+        <i class="fas fa-search fa-xs"></i>
       <% end %>
+    <% end %>
+  </div>
 
-      <div class="row">
-          <% @cars.each do |car| %>
-            <div class="card-container col-xs-12 col-sm-6 col-md-4">
-              <div class="car-card">
+  <div class="row">
 
-                <div class="car-background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
-                  <div class="car-card-header">
-                    <h3><%= car.brand %></h3>
-                    <p><%= car.model %></p>
-                  </div>
-                </div>
+    <% @cars.each do |car| %>
+      <div class="card-container col-xs-12 col-sm-6 col-md-4">
+        <div class="car-card">
 
-                <div class="car-card-price">
-                  <p><%= car.price.to_i %></p>
-                  <p class="smaller">€/day</p>
-                </div>
-
-                <div class="car-card-footer-left">
-                  <div class="ratings">
-
-                    <% sum_rat = car.ratings.sum(:rt_fun) + car.ratings.sum(:rt_condition) + car.ratings.sum(:rt_performance) + car.ratings.sum(:rt_owner) %>
-
-                    <% count_rat = car.ratings.count %>
-
-                    <% rat_calc = count_rat.zero? ? 0 : (sum_rat / (count_rat * 4).to_f).ceil %>
-
-                    <% (rat_calc).times do %>
-                      <i class="fas fa-star"></i>
-                    <% end %>
-
-                    <% (5 - rat_calc).times do %>
-                      <i class="far fa-star"></i>
-                    <% end %>
-
-                  </div>
-                  <p><i class="fas fa-map-marker-alt"></i> <%= car.owner.address %></p>
-                </div>
-
-                <div class="car-card-footer-right">
-                  <p><i class="fas fa-industry"></i> <%= car.year %></p>
-                  <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(car.mileage, :delimiter => '.') %> km</p>
-                </div>
-
-                <%= link_to "", car_path(car) %>
-
-              </div>
+          <div class="car-background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
+            <div class="car-card-header">
+              <h3><%= car.brand %></h3>
+              <p><%= car.model %></p>
             </div>
-        <% end %>
-      </div>
+          </div>
 
-    </div>
+          <div class="car-card-price">
+            <p><%= car.price.to_i %></p>
+            <p class="smaller">€/day</p>
+          </div>
+
+          <div class="car-card-footer-left">
+            <div class="ratings">
+
+              <% sum_rat = car.ratings.sum(:rt_fun) + car.ratings.sum(:rt_condition) + car.ratings.sum(:rt_performance) + car.ratings.sum(:rt_owner) %>
+
+              <% count_rat = car.ratings.count %>
+
+              <% rat_calc = count_rat.zero? ? 0 : (sum_rat / (count_rat * 4).to_f).ceil %>
+
+              <% if rat_calc.zero? %>
+                <p><strong>New car!</strong></p>
+
+              <% else %>
+                <% (rat_calc).times do %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+                <% (5 - rat_calc).times do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% end %>
+
+            </div>
+            <p><i class="fas fa-map-marker-alt"></i> <%= car.owner.address %></p>
+          </div>
+
+          <div class="car-card-footer-right">
+            <p><i class="fas fa-industry"></i> <%= car.year %></p>
+            <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(car.mileage, :delimiter => '.') %> km</p>
+          </div>
+
+          <%= link_to "", car_path(car) %>
+
+        </div>
+      </div>
+  <% end %>
 
   </div>
 </div>
