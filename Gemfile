@@ -16,6 +16,7 @@ gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
 gem 'nokogiri'
 gem "pundit"
+gem "pg_search"
 
 # --------
 

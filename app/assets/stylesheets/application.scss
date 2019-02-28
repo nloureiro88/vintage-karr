@@ -20,8 +20,11 @@
 body {
   background-color: white;
   font-family: $body-font;
-  min-height: 100vh;
   letter-spacing: 1px;
+}
+
+.wrapper {
+  min-height: calc(100vh - 200px);
 }
 
 .btn-primary {

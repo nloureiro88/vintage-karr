@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_120220) do
+ActiveRecord::Schema.define(version: 2019_02_28_112411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,10 +20,11 @@ ActiveRecord::Schema.define(version: 2019_02_26_120220) do
     t.bigint "driver_id"
     t.string "purpose"
     t.string "status", default: "created"
-    t.time "bk_start"
-    t.time "bk_end"
+    t.date "bk_start"
+    t.date "bk_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "bk_price"
     t.index ["car_id"], name: "index_bookings_on_car_id"
     t.index ["driver_id"], name: "index_bookings_on_driver_id"
   end
@@ -40,8 +41,6 @@ ActiveRecord::Schema.define(version: 2019_02_26_120220) do
     t.integer "mileage"
     t.boolean "for_rental", default: true
     t.float "price"
-    t.date "date_start"
-    t.date "date_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_cars_on_owner_id"
@@ -67,7 +66,6 @@ ActiveRecord::Schema.define(version: 2019_02_26_120220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
-    t.date "birthdate"
     t.string "photo"
     t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true

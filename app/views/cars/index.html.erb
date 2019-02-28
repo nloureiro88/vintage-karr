@@ -1,6 +1,12 @@
 <div class="container">
 
-      <h2>Take a ride on your dream KARR</h2>
+      <%= form_tag cars_path, class: "form-inline", method: :get do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find a Karr by brand, model or location"
+        %>
+      <% end %>
 
       <div class="row">
           <% @cars.each do |car| %>
@@ -19,17 +25,24 @@
                   <p class="smaller">€/day</p>
                 </div>
 
-                <div class="rating-holder">
-                  <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                  </div>
-                </div>
-
                 <div class="car-card-footer-left">
+                  <div class="ratings">
+
+                    <% sum_rat = car.ratings.sum(:rt_fun) + car.ratings.sum(:rt_condition) + car.ratings.sum(:rt_performance) + car.ratings.sum(:rt_owner) %>
+
+                    <% count_rat = car.ratings.count %>
+
+                    <% rat_calc = count_rat.zero? ? 0 : (sum_rat / (count_rat * 4).to_f).ceil %>
+
+                    <% (rat_calc).times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+
+                    <% (5 - rat_calc).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+
+                  </div>
                   <p><i class="fas fa-map-marker-alt"></i> <%= car.owner.address %></p>
                 </div>
 

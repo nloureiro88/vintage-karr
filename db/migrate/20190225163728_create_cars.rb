@@ -12,8 +12,6 @@ class CreateCars < ActiveRecord::Migration[5.2]
       t.integer :mileage
       t.boolean :for_rental, default: true
       t.float :price
-      t.date :date_start
-      t.date :date_end
 
       t.timestamps
     end

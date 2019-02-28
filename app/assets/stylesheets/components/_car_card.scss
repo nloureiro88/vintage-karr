@@ -71,9 +71,13 @@
   color: $vk-black;
 }
 
+.car-card-footer-left .ratings {
+  margin-bottom: 3px;
+}
+
 .car-card-footer-left {
   position: absolute;
-  bottom: 7px;
+  bottom: 8px;
   left: 20px;
   font-size: 12px;
   color: $vk-black;

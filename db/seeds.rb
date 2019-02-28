@@ -62,9 +62,7 @@ CSV.foreach(filepath_cars, csv_options) do |row|
               car_type: CAR_TYPES[rand(0..(CAR_TYPES.length - 1))],
               fuel_type: FUEL_TYPES[rand(0..(FUEL_TYPES.length - 1))],
               mileage: rand(50_000..400_000),
-              price: rand(90..900),
-              date_start: Date.new(2018,1,1), # to be changed for bookings
-              date_end: Date.new(2020,12,31)) # to be changed for bookings
+              price: rand(90..900))
   i += 1
 end
 
@@ -73,12 +71,14 @@ puts "Creating random bookings..."
 
 User.all.each do |driver_user|
   3.times do
-    Booking.create!(car: Car.all.sample, #random car
+    car = Car.all.sample
+    Booking.create!(car: car, #random car
                    driver: driver_user,
                    purpose: PURPOSES[rand(0..PURPOSES.length - 1)],
                    status: "created", # to be changed for bookings
                    bk_start: Date.new(2019,2,24), # to be changed for bookings
-                   bk_end: Date.new(2019,3,15)) # to be changed for bookings
+                   bk_end: Date.new(2019,3,15), # to be changed for bookings
+                   bk_price: car.price)
   end
 end
 

@@ -10,7 +10,21 @@ class Car < ApplicationRecord
   validates :car_photo, presence: true, allow_blank: false
   validates :year, presence: true, allow_blank: false, numericality: { only_integer: true }
   validates :mileage, presence: true, allow_blank: false, numericality: { only_integer: true }
-  validates :price, presence: true, allow_blank: false, numericality: true # Add scope?
-  validates :date_start, presence: true, allow_blank: false # Add scope?
-  validates :date_end, presence: true, allow_blank: false # Add scope?
+  validates :price, presence: true, allow_blank: false, numericality: true
+
+  include PgSearch
+  pg_search_scope :search_by_all,
+                  against: [:brand, :model],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
+  pg_search_scope :global_search,
+                  against: [:brand, :model],
+                  associated_against: {
+                    owner: [:address]
+                  },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end
