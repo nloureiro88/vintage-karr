@@ -22,7 +22,7 @@ class Car < ApplicationRecord
   pg_search_scope :global_search,
                   against: [:brand, :model],
                   associated_against: {
-                    owner: [:address]
+                    owner: [:address, :name]
                   },
                   using: {
                     tsearch: { prefix: true }

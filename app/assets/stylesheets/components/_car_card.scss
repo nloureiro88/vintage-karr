@@ -2,13 +2,28 @@
   margin-bottom: 50px;
 }
 
-.container h2 {
-  margin: 40px auto;
-  font-size: 48px;
-  text-align: center;
-  font-family: $headers-font;
-  color: $vk-orange;
-  text-shadow: 0.5px 0.5px 0.5px $vk-gray;
+.container .search-form {
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+
+  input {
+    flex-grow: 1;
+  }
+
+  .btn-search {
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    color: $vk-orange;
+
+    &:hover {
+      color: $vk-red;
+    }
+  }
 }
 
 .card-container {
@@ -31,6 +46,11 @@
 
 .car-card p {
   margin: 2px;
+  color: grey;
+}
+
+.car-card i {
+  color: grey;
 }
 
 .car-background {
@@ -48,15 +68,19 @@
   font-size: 10px;
   color: $vk-gray;
   text-shadow: 1px 1px 10px $vk-black;
-}
 
-.car-background .car-card-header h3 {
-  color: white;
-  letter-spacing: 1px;
-  font-family: $headers-font;
-  margin-bottom: 0px;
-  font-size: 18px;
-  text-shadow: 1px 1px 10px $vk-black;
+  h3 {
+    color: white;
+    letter-spacing: 1px;
+    font-family: $headers-font;
+    margin-bottom: 0px;
+    font-size: 18px;
+    text-shadow: 1px 1px 10px $vk-black;
+  }
+
+  p {
+    color: $vk-gray;
+  }
 }
 
 .car-card-footer-right {
@@ -68,11 +92,14 @@
 
 .car-card-footer-right p{
   margin-bottom: 5px;
-  color: $vk-black;
 }
 
 .car-card-footer-left .ratings {
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+
+  strong {
+    color: $vk-orange;
+  }
 }
 
 .car-card-footer-left {
@@ -105,6 +132,7 @@
 }
 
 .car-card-price p {
+  color: $vk-orange;
   padding-top: 2px;
   font-weight: bold;
   margin: 0;
@@ -132,6 +160,14 @@
   border-color: $vk-orange;
   box-shadow-color: $vk-orange;
 
+  p, i {
+    color: $vk-black;
+  }
+
+  .car-card-header p {
+    color: $vk-gray;
+  }
+
   .car-background {
     filter: brightness(150%);
   }
@@ -150,5 +186,9 @@
     h3 {
       color: $vk-orange;
     }
+  }
+
+  strong {
+    color: $vk-black;
   }
 }

@@ -1,3 +1,5 @@
+//=require flatpickr/dist/flatpickr.min
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -19,7 +21,6 @@
 
 
 //
-
 body {
   background-color: white;
   font-family: $body-font;
@@ -34,9 +35,26 @@ body {
   background-color: $vk-orange;
   border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 20px;
 
   &:hover{
     background-color: $vk-red;
   }
+}
+
+.btn-secondary {
+  background-color: $vk-gray;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+
+  &:hover{
+    background-color: $vk-red;
+  }
+}
+
+form {
+  font-family: $body-font;
+  font-size: 14px;
+  font-color: $vk-black;
 }
