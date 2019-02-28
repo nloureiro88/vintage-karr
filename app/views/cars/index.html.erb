@@ -8,7 +8,7 @@
         placeholder: "Find a Karr by brand, model, owner or location"
       %>
       <%= button_tag(type: 'submit', class: "btn btn-search") do %>
-        <i class="fas fa-search fa-xs"></i>
+        <i class="fas fa-search"></i>
       <% end %>
     <% end %>
   </div>
@@ -45,10 +45,10 @@
 
               <% else %>
                 <% (rat_calc).times do %>
-                  <i class="fas fa-star"></i>
+                  <i class="fas fa-circle"></i>
                 <% end %>
                 <% (5 - rat_calc).times do %>
-                  <i class="far fa-star"></i>
+                  <i class="far fa-circle"></i>
                 <% end %>
               <% end %>
 
