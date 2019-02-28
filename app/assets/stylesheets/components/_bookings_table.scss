@@ -1,0 +1,125 @@
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-item {
+  //background: tomato;
+  padding: 5px 15px;
+  // width: 20%;
+  //height: 50px;
+  margin: 0px;
+  //line-height: 50px;
+  color: rgba(0,0,0,0.6);
+  // font-weight: bold;
+  // font-size: 2em;
+  text-align: center;
+  img {
+      border-radius: 5px;
+      height: 70px;
+      width: 70px;
+      margin-bottom: 0px;
+    }
+  &.col-1{ width: 10%; color:red;}
+  &.col-2{ width: 22%; font-weight: bold;}
+  &.col-3{ width: 18%; }
+  &.col-4{ width: 12%;font-style: italic;}
+  &.col-5{ width: 15%;}
+  &.col-6{ width: 100px;}
+  &.col-7{ width: 10%;}
+}
+
+.tbl-rating-holder {
+  //width: 100px;
+  //margin: 0px auto;
+  //padding: 0;
+  vertical-align: center;
+  //position: relative; //absolute;
+
+  display: inline-block;
+  padding: toem(10px) toem(0px);
+  // background-color: #fff;
+  //border-radius: toem(25px);
+  box-sizing: border-box;
+}
+
+ul {
+   list-style:none;
+    padding:0;
+    margin:0;
+}
+
+
+.table-header {
+  font-weight: bold;
+  height: 50px;
+  width: 100%;
+  position: relative;
+  background-color: whitesmoke;
+  border: 1px solid $vk-gray;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px gray;
+  vertical-align: center;
+  margin: 10px auto;
+  transition: all 1s ease;
+
+}
+
+.table-row {
+  height: 100px;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  border: 1px solid $vk-gray;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px gray;
+  vertical-align: center;
+  margin: 10px auto;
+  transition: all 1s ease;
+  //border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  //display: inline-block;
+
+  &:hover {
+      background-color: rgba(249, 105, 14, 0.5); //$vk-orange; exctasy orange
+      cursor: pointer;
+      .flex-item{
+        color: $vk-black;
+        font-weight:bold;
+        &:hover {
+      color: white;
+    }
+      }
+    }
+
+}
+
+
+.c-rating {
+  @include c-rating(toem(30px), button); //clickable
+
+  &--small {
+    font-size: 50%
+  }
+
+  &--big {
+    font-size: 150%;
+  }
+}
+

@@ -1,2 +1,53 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+<div class="container">
+
+<h2><%= @bookings.first.driver.name %>'s dream car rides..</h2>
+<h6 style="text-align:right">for detailed memmories check each review..</h6>
+<% bookings2 = @bookings %>
+<a href="<% bookings2 = @bookings.take(3) %>"><h6 style="text-align:right">TOP stories!</h6></a>
+<a href="<% bookings2 = @bookings %>"><h6 style="text-align:right">All stories!</h6></a>
+
+
+  <div class="row">
+
+    <ul class="flex-container flex-start table-header">
+      <li class="flex-item col-1">myKarr</li>
+      <li class="flex-item col-2">Brand</li>
+      <li class="flex-item col-3">Model</li>
+      <li class="flex-item col-3">Owner</li>
+      <li class="flex-item col-4">Date/Days</li>
+      <li class="flex-item col-5">Pr/UnPr/TCt</li>
+      <li class="flex-item col-6">Rating</li>
+       <li class="flex-item col-7">Review</li>
+    </ul>
+
+    <% bookings2.each do |booking| %>
+
+    <ul class="flex-container flex-start table-row">
+      <li class="flex-item col-1"><%= image_tag booking.car.car_photo %></li>
+      <li class="flex-item col-2"><%= booking.car.brand %></li>
+      <li class="flex-item col-3"><%= booking.car.model %></li>
+      <li class="flex-item col-3"><%= booking.car.owner.name %></li>
+      <li class="flex-item col-4"><%= booking.car.year %></li>
+      <li class="flex-item col-5"><%= booking.car.price %></li>
+      <li>
+        <div class="flex-item tbl-rating-holder col-6">
+          <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+          </div>
+        </div>
+      </li>
+      <li class="flex-item col-7"><i class="fas fa-file-alt" style="font-size: 30px"></i></li>
+     <!--  <li class="flex-item"><%#= booking.driver.name %></li> -->
+     <!--  <li class="flex-item"><%#= booking.car.owner.name %></li> -->
+                 <!--  <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>"> -->
+
+    </ul>
+     <% end %>
+
+  </div>
+
+</div>

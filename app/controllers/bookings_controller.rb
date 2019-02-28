@@ -1,6 +1,8 @@
 class BookingsController < ApplicationController
   def index
-    authorize @booking
+    @bookings = policy_scope(Booking).all
+
+    # @bookings = policy_scope(Booking).where(booking.driver == current.user)
   end
 
   def create

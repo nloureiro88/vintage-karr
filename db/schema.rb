@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2019_02_26_120220) do
     t.bigint "driver_id"
     t.string "purpose"
     t.string "status", default: "created"
-    t.time "bk_start"
-    t.time "bk_end"
+    t.date "bk_start"
+    t.date "bk_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["car_id"], name: "index_bookings_on_car_id"
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2019_02_26_120220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
-    t.date "birthdate"
     t.string "photo"
     t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
