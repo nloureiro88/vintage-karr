@@ -10,6 +10,19 @@ class CarsController < ApplicationController
     @cars = @cars.reject { |car| car.owner == current_user }
   end
 
+  def garage
+    authorize Car
+    @cars = policy_scope(Car).where(owner: current_user).order(:brand)
+  end
+
+  def rental_toggle
+    authorize @car
+    @car.for_rental = !@car.for_rental
+    @car.save
+
+    redirect_to garage_cars_path
+  end
+
   def show
     authorize @car
     @booking = Booking.new
