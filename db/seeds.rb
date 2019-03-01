@@ -76,8 +76,8 @@ User.all.each do |driver_user|
                    driver: driver_user,
                    purpose: PURPOSES[rand(0..PURPOSES.length - 1)],
                    status: "created", # to be changed for bookings
-                   bk_start: Date.new(2019,2,24), # to be changed for bookings
-                   bk_end: Date.new(2019,3,15), # to be changed for bookings
+                   bk_start: Date.today + 1, # to be changed for bookings
+                   bk_end: Date.today + 4, # to be changed for bookings
                    bk_price: car.price)
   end
 end
