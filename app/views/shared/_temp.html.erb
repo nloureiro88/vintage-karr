@@ -1,0 +1,16 @@
+ <div id="banner">
+    <div class="video-wrapper">
+      <%= video_tag "vk_landing_bkg.mp4", autoplay: true, loop: true, muted: true, style: "min-height: 100vh; min-width: 100vw;" %>
+          <div class="banner-content">
+            <h1>Welcome to Vintage Karr</h1>
+            <br>
+            <p>Rent-a-Karr from the best collection of Hollywood's <br>most famous cars and vehicles in the universe!</p>
+
+            <br>
+
+            <%= link_to cars_path do  %>
+            <button class="btn btn-primary btn-lg">Find your KARR</button>
+            <% end %>
+          </div>
+    </div>
+  </div>

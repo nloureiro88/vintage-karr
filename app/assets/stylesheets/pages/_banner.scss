@@ -30,17 +30,32 @@ text-shadow: 0px 15px 5px rgba(0,0,0,0.1),
 // Possible feature to add, don't delete .video
 
 .video-wrapper {
+  // padding-top: 40vh; // test
   position: relative;
   top: 0;
   bottom: 0;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
+  background-size: cover; // test
   // background-image: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0.9));
+
+  video {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background-size: cover;
+    overflow: hidden;
+  }
 }
 
 .banner-content {
