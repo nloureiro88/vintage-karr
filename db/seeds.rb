@@ -36,11 +36,12 @@ puts "Creating users from Le Wagon batch..."
 
 csv_options = { col_sep: ';' }
 CSV.foreach(filepath_users, csv_options) do |row|
-  User.create!(name: row[0],
-               password: "12345678",
-               email: row[0].downcase.tr(" ", ".") + "@lewagon.com",
-               address: row[1],
-               photo: row[2])
+  new_user = User.new(name: row[0],
+                      password: "12345678",
+                      email: row[0].downcase.tr(" ", ".") + "@lewagon.com",
+                      address: row[1])
+  new_user.remote_photo_url = row[2]
+  new_user.save!
 end
 
 # Create cars

@@ -1,0 +1,66 @@
+<div class="container">
+
+  <div class="row garage-buttons">
+    <%= link_to "Add Car", new_car_path, class: "btn btn-primary" %>
+    <%= link_to "Show Bookings", bookings_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="row">
+
+    <% @cars.each do |car| %>
+      <div class="card-container col-xs-12 col-sm-6 col-md-4">
+        <div class="car-card">
+
+          <div class="car-background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
+            <div class="car-card-header">
+              <h3><%= car.brand %></h3>
+              <p><%= car.model %></p>
+            </div>
+          </div>
+
+          <div class="car-card-price">
+            <p><%= car.price.to_i %></p>
+            <p class="smaller">€/day</p>
+          </div>
+
+          <div class="car-card-footer-left">
+            <div class="ratings">
+
+              <% sum_rat = car.ratings.sum(:rt_fun) + car.ratings.sum(:rt_condition) + car.ratings.sum(:rt_performance) + car.ratings.sum(:rt_owner) %>
+
+              <% count_rat = car.ratings.count %>
+
+              <% rat_calc = count_rat.zero? ? 0 : (sum_rat / (count_rat * 4).to_f).ceil %>
+
+              <% if rat_calc.zero? %>
+                <p><strong>New car!</strong></p>
+
+              <% else %>
+                <% (rat_calc).times do %>
+                  <i class="fas fa-circle"></i>
+                <% end %>
+                <% (5 - rat_calc).times do %>
+                  <i class="far fa-circle"></i>
+                <% end %>
+              <% end %>
+
+            </div>
+            <p class="garage-actions">
+              <i class="fas fa-edit fa-lg"><a href="#"></a></i>
+              <i class="fas fa-shield-alt fa-lg"><a href=<%= "#{car.id}/toggle" %>></a></i>
+            </p>
+          </div>
+
+          <div class="car-card-footer-right">
+            <p><i class="fas fa-industry"></i> <%= car.year %></p>
+            <p><i class="fas fa-car-crash"></i> <%= number_with_delimiter(car.mileage, :delimiter => '.') %> km</p>
+          </div>
+
+          <%= link_to "", car_path(car) %>
+
+        </div>
+      </div>
+  <% end %>
+
+  </div>
+</div>

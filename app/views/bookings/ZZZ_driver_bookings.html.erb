@@ -1,0 +1,90 @@
+<div class="container">
+
+<h2><%= current_user.name %>'s dream car rides..</h2>
+
+
+<!-- *************** TABLEAU ***************************** -->
+  <% i = 0 %>
+      <% sum = 0 %>
+      <% days = 0 %>
+      <% sdays = 0 %>
+
+  <% @bookings.each do |booking| %>
+    <% i += 1 %>
+    <% days = (booking.bk_end - booking.bk_start).to_i %>
+    <% sdays += days %>
+    <% sum += days * booking.car.price %>
+    <% end %>
+
+   <tr>
+    <p style="text-align:center">
+      <td> Rentals: <strong><%= i %></strong> | </td>
+      <td> Days: <strong><%= sdays %></strong> | </td>
+      <td> Revenues: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong> | </td>
+    </p>
+   </tr>
+
+<h6  style="text-align:right">for detailed memmories check each review..</h6>
+
+<!-- *************** HEADER ***************************** -->
+
+
+  <div class="row">
+
+    <ul class="flex-container flex-start table-header">
+      <li class="flex-item col-1">myKarr</li>
+      <li class="flex-item col-2">Brand</li>
+      <li class="flex-item col-3">Owner</li>
+      <li class="flex-item col-3">Purpose</li>
+      <li class="flex-item col-4">Days</li>
+      <li class="flex-item col-5">Total cost</li>
+      <li class="flex-item col-6">Rating</li>
+       <li class="flex-item col-7">Review</li>
+    </ul>
+
+    <% @bookings.each do |booking| %>
+
+    <ul class="flex-container flex-start table-row">
+      <li class="flex-item col-1"><%= image_tag booking.car.car_photo %></li>
+  <!--<li class="flex-item col-2"><%= booking.driver.name %></li>-->
+      <li class="flex-item col-2"><%= booking.car.brand %></li>
+      <li class="flex-item col-3"><%= booking.car.owner.name %></li>
+      <li class="flex-item col-3"><%= booking.purpose %></li>
+      <li class="flex-item col-4"><%= days = (booking.bk_end - booking.bk_start).to_i %></li>
+      <li class="flex-item col-5">
+        <%=number_to_currency((booking.car.price * days), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
+      </li>
+      <li>
+        <div class="flex-item tbl-rating-holder col-6">
+          <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+          </div>
+        </div>
+      </li>
+      <li class="flex-item col-7 last-li">
+        <!-- <i class="fas fa-file-alt" style="font-size: 30px"></i> -->
+        <a href="#" onclick="toggle_visibility('review');">
+          <i class="fas fa-file-alt" style="font-size: 30px"></i>
+        </a>
+      </li>
+    </ul>
+
+    <!-- hidden div -->
+     <ul id="review" style="display:none;" class="flex-container flex-start table-row review-ul">
+          <li class="flex-item">
+            <div>
+              <%= booking.car.description %>
+            </div>
+          </li>
+      </ul>
+    <% end %>
+
+
+  </div>
+
+</div>
+

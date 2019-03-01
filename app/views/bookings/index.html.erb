@@ -1,2 +1,108 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+<div class="container .div-car-bookings">
+
+<!-- <h2><%#= current_user.name %>'s dream car rides..</h2> -->
+
+  <div class="row garage-buttons">
+    <%#= link_to "Add Car", new_car_path, class: "btn btn-primary" %>
+    <%#= link_to "Show Cars", garage_cars_path, class: "btn btn-primary" %>
+  </div>
+
+<!-- *************** TABLEAU ***************************** -->
+  <% i = 0 %>
+  <% sum = 0 %>
+  <% days = 0 %>
+  <% sdays = 0 %>
+
+  <% @bookings.each do |booking| %>
+    <% i += 1 %>
+    <% days = (booking.bk_end - booking.bk_start).to_i %>
+    <% sdays += days %>
+    <% sum += days * booking.car.price %>
+    <% end %>
+
+   <tr>
+    <p style="text-align:center; color: gray">
+      <td> Rentals: <strong><%= i %></strong> | </td>
+      <td> Days: <strong><%= sdays %></strong> | </td>
+      <td> Expenses: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong></td>
+    </p>
+   </tr>
+
+<!-- <h6  style="text-align:right">for detailed memmories check each review..</h6>
+ -->
+<!-- *************** HEADER ***************************** -->
+
+
+  <div class="row">
+
+    <ul class="flex-container flex-start table-header">
+      <li class="flex-item col-1"></li>
+      <li class="flex-item col-2">Brand</li>
+      <li class="flex-item col-3">Owner</li>
+      <li class="flex-item col-4">Start Date</li>
+      <li class="flex-item col-4">Days</li>
+      <li class="flex-item col-5">Price</li>
+      <li class="flex-item col-6">Rating</li>
+      <!--  <li class="flex-item col-7">Review</li> -->
+    </ul>
+
+    <% @bookings.order('bk_start DESC').each do |booking| %>
+
+    <ul class="flex-container flex-start table-row">
+      <li class="flex-item col-1">
+        <div style="background: url(<%= image_path booking.car.car_photo %>) no-repeat center center; background-size: cover; height: 70px; border-radius: 5px"></div>
+        </li>
+      <li class="flex-item col-2"><%= booking.car.brand %></li>
+      <li class="flex-item col-3"><%= booking.car.owner.name %></li>
+      <li class="flex-item col-4"><%= booking.bk_start %></li>
+      <li class="flex-item col-4"><%= days = (booking.bk_end - booking.bk_start).to_i %></li>
+      <li class="flex-item col-5">
+        <%=number_to_currency((booking.car.price * days), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
+      </li>
+      <li class="flex-item col-6">
+        <div class="rating garage-rating">
+            <% sum_rat = booking.ratings.sum(:rt_fun) + booking.ratings.sum(:rt_condition) + booking.ratings.sum(:rt_performance) + booking.ratings.sum(:rt_owner) %>
+            <% count_rat = booking.ratings.count %>
+
+              <% if count_rat.zero? %>
+
+              <% if booking.bk_start <= Date.today %>
+                <p style="color: #18A999; font-weight: bold">Ongoing</p>
+
+              <% else booking.bk_start > Date.today %>
+                <p style="color: #1D84B5; font-weight: bold">Planned</p>
+
+              <% end %>
+
+            <% else %>
+
+              <% rat_calc = (sum_rat / (count_rat * 4).to_f).round(0) %>
+              <p>
+                <% (rat_calc).times do %><i class="fas fa-circle fa-sm" style="margin-top: 0px"></i><% end %><% (5 - rat_calc).times do %><i class="far fa-circle fa-sm"></i><% end %>
+              </p>
+
+            <% end %>
+          </div>
+      </li>
+<!--       <li class="flex-item col-7 last-li">
+        <a href="#" onclick="toggle_visibility('review');">
+          <i class="fas fa-file-alt" style="font-size: 30px"></i>
+        </a>
+      </li> -->
+    </ul>
+
+    <!-- hidden div -->
+<!--      <ul id="review" style="display:none;" class="flex-container flex-start table-row review-ul">
+          <li class="flex-item">
+            <div>
+              <%#= booking.car.description %>
+            </div>
+          </li>
+      </ul> -->
+    <% end %>
+
+
+  </div>
+
+</div>
+

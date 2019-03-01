@@ -1,5 +1,4 @@
 import "bootstrap";
-
 import flatpickr from 'flatpickr'
 
 import { initUpdateNavbarOnScroll } from '../components/navbar';
@@ -40,11 +39,13 @@ flatpickr(".booking-date", {
   onChange: calcPrice
 });
 
-// const bookingDates = document.querySelectorAll(".booking-date")
-// console.log(bookingDates)
-// bookingDates.forEach((bookingDate) => {
-//   bookingDate.addEventListener('', (event) => {
+jQuery(document).ready(function($) {
+  $('.last-li').each(function() {
+      $('ul.review-ul').hide();
 
-
-//   }
-// })
+      $(this).hover(function() {
+         $(this).parent().next('ul.review-ul').fadeToggle();
+         return false;
+      });
+   });
+});
