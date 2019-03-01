@@ -1,14 +1,10 @@
 <div class="container">
 
-<h2><%= current_user.name %>'s garage..decent one</h2>
-
- <!-- ***************Injected controller **************** -->
-    <% @cars = Car.where(owner: current_user)%>
-    <% @bookings = policy_scope(Booking).where(car: @cars) %>
+<h2><%= current_user.name %>'s dream car rides..</h2>
 
 
 <!-- *************** TABLEAU ***************************** -->
-   <% i = 0 %>
+  <% i = 0 %>
       <% sum = 0 %>
       <% days = 0 %>
       <% sdays = 0 %>
@@ -20,51 +16,43 @@
     <% sum += days * booking.car.price %>
     <% end %>
 
-<tr>
+   <tr>
     <p style="text-align:center">
       <td> Rentals: <strong><%= i %></strong> | </td>
       <td> Days: <strong><%= sdays %></strong> | </td>
       <td> Revenues: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong> | </td>
     </p>
-</tr>
+   </tr>
 
-<!-- <div class="row">
-<ul class="dash-container space-between">
+<h6  style="text-align:right">for detailed memmories check each review..</h6>
 
-      <div class="table-dash dash-item"> &female;: <strong><%= i %></strong> | </div>
-      <div class="table-dash dash-item"> &day;: <strong><%= days %></strong> | </div>
-      <div class="table-dash dash-item"> &sum;: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong></div>
-</ul>
-  </div> -->
 <!-- *************** HEADER ***************************** -->
+
 
   <div class="row">
 
     <ul class="flex-container flex-start table-header">
       <li class="flex-item col-1">myKarr</li>
-      <li class="flex-item col-3">Brand</li>
-      <li class="flex-item col-3">Model</li>
-      <li class="flex-item col-4">Year</li>
-      <li class="flex-item col-5">Mileage</li>
-      <li class="flex-item col-5">Price</li>
-      <li class="flex-item col-7">Rating</li>
-       <!-- <li class="flex-item col-7">Review</li> -->
+      <li class="flex-item col-2">Brand</li>
+      <li class="flex-item col-3">Owner</li>
+      <li class="flex-item col-3">Purpose</li>
+      <li class="flex-item col-4">Days</li>
+      <li class="flex-item col-5">Total cost</li>
+      <li class="flex-item col-6">Rating</li>
+       <li class="flex-item col-7">Review</li>
     </ul>
-
 
     <% @bookings.each do |booking| %>
 
     <ul class="flex-container flex-start table-row">
       <li class="flex-item col-1"><%= image_tag booking.car.car_photo %></li>
   <!--<li class="flex-item col-2"><%= booking.driver.name %></li>-->
-      <li class="flex-item col-3"><%= booking.car.brand %></li>
-      <li class="flex-item col-3"><%= booking.car.model %></li>
-      <li class="flex-item col-4"><%= booking.car.year %></li>
+      <li class="flex-item col-2"><%= booking.car.brand %></li>
+      <li class="flex-item col-3"><%= booking.car.owner.name %></li>
+      <li class="flex-item col-3"><%= booking.purpose %></li>
+      <li class="flex-item col-4"><%= days = (booking.bk_end - booking.bk_start).to_i %></li>
       <li class="flex-item col-5">
-        <%=number_to_currency((booking.car.mileage), precision: 0, unit: "km", separator: ",", delimiter: ".", format: "%n %u")%>
-      </li>
-      <li class="flex-item col-5">
-              <%=number_to_currency((booking.car.price), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
+        <%=number_to_currency((booking.car.price * days), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
       </li>
       <li>
         <div class="flex-item tbl-rating-holder col-6">
@@ -77,6 +65,12 @@
           </div>
         </div>
       </li>
+      <li class="flex-item col-7 last-li">
+        <!-- <i class="fas fa-file-alt" style="font-size: 30px"></i> -->
+        <a href="#" onclick="toggle_visibility('review');">
+          <i class="fas fa-file-alt" style="font-size: 30px"></i>
+        </a>
+      </li>
     </ul>
 
     <!-- hidden div -->
@@ -87,9 +81,8 @@
             </div>
           </li>
       </ul>
+    <% end %>
 
-
-     <% end %>
 
   </div>
 

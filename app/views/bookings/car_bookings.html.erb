@@ -1,0 +1,88 @@
+
+
+<!-- *************** INJECTED CAR TABLE ********* -->
+
+<div class="container">
+
+
+
+<!-- *************** INJECTED CONTROLLER KIND ***************************** -->
+
+   <% @bookings = policy_scope(Booking).where(car_id: @car) %>
+     <% if (@car.owner == current_user) %>
+     <h6 style="text-align:center"><%= @car.brand %>'s dream car rides..</h6>
+
+
+<!-- *************** TABLEAU ***************************** -->
+  <% i = 0 %>
+      <% sum = 0 %>
+      <% days = 0 %>
+      <% sdays = 0 %>
+
+  <% @bookings.each do |booking| %>
+    <% i += 1 %>
+    <% days = (booking.bk_end - booking.bk_start).to_i %>
+    <% sdays += days %>
+    <% sum += days * booking.car.price %>
+    <% end %>
+
+   <tr>
+    <p style="text-align:center">
+      <td> Rentals: <strong><%= i %></strong> | </td>
+      <td> Days: <strong><%= sdays %></strong> | </td>
+      <td> Revenues: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong> | </td>
+    </p>
+   </tr>
+
+<!-- *************** HEADER ***************************** -->
+
+
+
+    <div class="row">
+      <ul class="flex-container flex-start table-header">
+        <li class="car-flex-item col-1"></li>
+        <li class="car-flex-item col-2">Driver</li>
+       <!--  <li class="car-flex-item col-3">Owner</li> -->
+        <li class="car-flex-item col-3">Purpose</li>
+        <li class="car-flex-item col-4">End Date</li>
+        <li class="car-flex-item col-4">Days</li>
+        <li class="car-flex-item col-5">Total cost</li>
+        <li class="car-flex-item col-6">Rating</li>
+         <li class="car-flex-item col-7">Review</li>
+      </ul>
+
+        <% @bookings.each do |booking| %>
+
+          <ul class="flex-container flex-start table-row">
+        <li class="car-flex-item col-1"><%= image_tag booking.driver.photo %></li>
+        <li class="car-flex-item col-2"><%= booking.driver.name %></li>
+       <!--     <li class="car_flex-item col-2"><%= booking.car.brand %></li> -->
+        <li class="car-flex-item col-3"><%= booking.purpose %></li>
+        <li class="car-flex-item col-3"><%= booking.bk_end %></li>
+
+        <li class="car-flex-item col-4"><%= days = (booking.bk_end - booking.bk_start).to_i %></li>
+        <li class="car-flex-item col-5">
+          <%=number_to_currency((booking.car.price * days), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
+        </li>
+        <li>
+          <div class="car-flex-item tbl-rating-holder col-6">
+            <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
+              <button>1</button>
+              <button>2</button>
+              <button>3</button>
+              <button>4</button>
+              <button>5</button>
+            </div>
+          </div>
+        </li>
+        <li class="car-flex-item col-7"><i class="fas fa-file-alt" style="font-size: 30px" onclick="" ="document.getElementById('id01').style.display='block'"></i></li>
+          </ul>
+
+        <% end %>
+
+  <% end %>
+
+  </div>
+</div>
+
+
