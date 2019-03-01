@@ -70,9 +70,10 @@ end
 # Create random bookings
 puts "Creating random bookings..."
 
-st_date = Date.new(2018,7,24)
+
 User.all.each do |driver_user|
-  days = rand(5..30)
+  days = rand(5..60)
+  st_date = Date.new(2018,2,1)
   6.times do
     car = Car.all.select { |car| car.owner != driver_user}.sample
     Booking.create!(car: car, #random car
