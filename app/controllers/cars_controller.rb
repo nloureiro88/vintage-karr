@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: %i[show edit update]
+  before_action :set_car, only: %i[show edit update rental_toggle]
 
   def index
     if params[:query].present?

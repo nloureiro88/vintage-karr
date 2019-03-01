@@ -1,0 +1,31 @@
+.garage-buttons {
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.garage-actions {
+  position: absolute;
+  bottom: 25px;
+  display: flex;
+
+  a, i {
+    z-index: 8;
+  }
+
+  i:hover {
+    color: $vk-red;
+  }
+
+  i:first-child{
+    padding-right: 5px;
+  }
+
+}
+
+.garage-rating {
+  p{
+    margin:0;
+  }
+}

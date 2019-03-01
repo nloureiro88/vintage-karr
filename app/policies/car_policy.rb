@@ -13,7 +13,7 @@ class CarPolicy < ApplicationPolicy
     true
   end
 
-  def hide?
+  def rental_toggle?
     record.owner == user # || user.admin?
   end
 

@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
   validates :bk_start, presence: true, allow_blank: false
   validates :bk_end, presence: true, allow_blank: false
   validates :bk_price, presence: true, allow_blank: false, numericality: true
-  validate :valid_dates
+  # validate :valid_dates
 
   def valid_dates
     return unless bk_start && bk_end

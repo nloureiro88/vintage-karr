@@ -1,16 +1,8 @@
 <div class="container">
 
-  <div class="row">
-    <%= form_tag cars_path, class: "search-form", method: :get do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Find a Karr by brand, model, owner or location"
-      %>
-      <%= button_tag(type: 'submit', class: "btn btn-search") do %>
-        <i class="fas fa-search"></i>
-      <% end %>
-    <% end %>
+  <div class="row garage-buttons">
+    <%= link_to "Add Car", new_car_path, class: "btn btn-primary" %>
+    <%= link_to "Show Bookings", bookings_path, class: "btn btn-primary" %>
   </div>
 
   <div class="row">
@@ -53,11 +45,10 @@
               <% end %>
 
             </div>
-            <div class="garage-actions">
-              <a href="cars/#{car.id}/edit"><i class="fas fa-edit fa-lg"></i></a>
-              <a href="cars/#{car.id}/bookings"><i class="fas fa-edit fa-lg"></i></a>
-              <a href="cars/#{car.id}/hide"><i class="fas fa-shield-alt"></i></a>
-            </div>
+            <p class="garage-actions">
+              <i class="fas fa-edit fa-lg"><a href="#"></a></i>
+              <i class="fas fa-shield-alt fa-lg"><a href=<%= "#{car.id}/toggle" %>></a></i>
+            </p>
           </div>
 
           <div class="car-card-footer-right">

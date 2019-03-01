@@ -1,17 +1,17 @@
-<div class="container">
+<div class="container .div-car-bookings">
 
-<h2><%= current_user.name %>'s garage..decent one</h2>
+<!-- <h2><%#= current_user.name %>'s dream car rides..</h2> -->
 
- <!-- ***************Injected controller **************** -->
-    <% @cars = Car.where(owner: current_user)%>
-    <% @bookings = policy_scope(Booking).where(car: @cars) %>
-
+  <div class="row garage-buttons">
+    <%#= link_to "Add Car", new_car_path, class: "btn btn-primary" %>
+    <%#= link_to "Show Cars", garage_cars_path, class: "btn btn-primary" %>
+  </div>
 
 <!-- *************** TABLEAU ***************************** -->
-   <% i = 0 %>
-      <% sum = 0 %>
-      <% days = 0 %>
-      <% sdays = 0 %>
+  <% i = 0 %>
+  <% sum = 0 %>
+  <% days = 0 %>
+  <% sdays = 0 %>
 
   <% @bookings.each do |booking| %>
     <% i += 1 %>
@@ -20,76 +20,87 @@
     <% sum += days * booking.car.price %>
     <% end %>
 
-<tr>
-    <p style="text-align:center">
+   <tr>
+    <p style="text-align:center; color: gray">
       <td> Rentals: <strong><%= i %></strong> | </td>
       <td> Days: <strong><%= sdays %></strong> | </td>
-      <td> Revenues: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong> | </td>
+      <td> Expenses: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong></td>
     </p>
-</tr>
+   </tr>
 
-<!-- <div class="row">
-<ul class="dash-container space-between">
-
-      <div class="table-dash dash-item"> &female;: <strong><%= i %></strong> | </div>
-      <div class="table-dash dash-item"> &day;: <strong><%= days %></strong> | </div>
-      <div class="table-dash dash-item"> &sum;: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong></div>
-</ul>
-  </div> -->
+<!-- <h6  style="text-align:right">for detailed memmories check each review..</h6>
+ -->
 <!-- *************** HEADER ***************************** -->
+
 
   <div class="row">
 
     <ul class="flex-container flex-start table-header">
-      <li class="flex-item col-1">myKarr</li>
-      <li class="flex-item col-3">Brand</li>
-      <li class="flex-item col-3">Model</li>
-      <li class="flex-item col-4">Year</li>
-      <li class="flex-item col-5">Mileage</li>
+      <li class="flex-item col-1"></li>
+      <li class="flex-item col-2">Brand</li>
+      <li class="flex-item col-3">Owner</li>
+      <li class="flex-item col-4">Start Date</li>
+      <li class="flex-item col-4">Days</li>
       <li class="flex-item col-5">Price</li>
-      <li class="flex-item col-7">Rating</li>
-       <!-- <li class="flex-item col-7">Review</li> -->
+      <li class="flex-item col-6">Rating</li>
+      <!--  <li class="flex-item col-7">Review</li> -->
     </ul>
 
-
-    <% @bookings.each do |booking| %>
+    <% @bookings.order('bk_start DESC').each do |booking| %>
 
     <ul class="flex-container flex-start table-row">
-      <li class="flex-item col-1"><%= image_tag booking.car.car_photo %></li>
-  <!--<li class="flex-item col-2"><%= booking.driver.name %></li>-->
-      <li class="flex-item col-3"><%= booking.car.brand %></li>
-      <li class="flex-item col-3"><%= booking.car.model %></li>
-      <li class="flex-item col-4"><%= booking.car.year %></li>
+      <li class="flex-item col-1">
+        <div style="background: url(<%= image_path booking.car.car_photo %>) no-repeat center center; background-size: cover; height: 70px; border-radius: 5px"></div>
+        </li>
+      <li class="flex-item col-2"><%= booking.car.brand %></li>
+      <li class="flex-item col-3"><%= booking.car.owner.name %></li>
+      <li class="flex-item col-4"><%= booking.bk_start %></li>
+      <li class="flex-item col-4"><%= days = (booking.bk_end - booking.bk_start).to_i %></li>
       <li class="flex-item col-5">
-        <%=number_to_currency((booking.car.mileage), precision: 0, unit: "km", separator: ",", delimiter: ".", format: "%n %u")%>
+        <%=number_to_currency((booking.car.price * days), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
       </li>
-      <li class="flex-item col-5">
-              <%=number_to_currency((booking.car.price), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
-      </li>
-      <li>
-        <div class="flex-item tbl-rating-holder col-6">
-          <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
+      <li class="flex-item col-6">
+        <div class="rating garage-rating">
+            <% sum_rat = booking.ratings.sum(:rt_fun) + booking.ratings.sum(:rt_condition) + booking.ratings.sum(:rt_performance) + booking.ratings.sum(:rt_owner) %>
+            <% count_rat = booking.ratings.count %>
+
+              <% if count_rat.zero? %>
+
+              <% if booking.bk_start <= Date.today %>
+                <p style="color: #18A999; font-weight: bold">Ongoing</p>
+
+              <% else booking.bk_start > Date.today %>
+                <p style="color: #1D84B5; font-weight: bold">Planned</p>
+
+              <% end %>
+
+            <% else %>
+
+              <% rat_calc = (sum_rat / (count_rat * 4).to_f).round(0) %>
+              <p>
+                <% (rat_calc).times do %><i class="fas fa-circle fa-sm" style="margin-top: 0px"></i><% end %><% (5 - rat_calc).times do %><i class="far fa-circle fa-sm"></i><% end %>
+              </p>
+
+            <% end %>
           </div>
-        </div>
       </li>
+<!--       <li class="flex-item col-7 last-li">
+        <a href="#" onclick="toggle_visibility('review');">
+          <i class="fas fa-file-alt" style="font-size: 30px"></i>
+        </a>
+      </li> -->
     </ul>
 
     <!-- hidden div -->
-     <ul id="review" style="display:none;" class="flex-container flex-start table-row review-ul">
+<!--      <ul id="review" style="display:none;" class="flex-container flex-start table-row review-ul">
           <li class="flex-item">
             <div>
-              <%= booking.car.description %>
+              <%#= booking.car.description %>
             </div>
           </li>
-      </ul>
+      </ul> -->
+    <% end %>
 
-
-     <% end %>
 
   </div>
 
