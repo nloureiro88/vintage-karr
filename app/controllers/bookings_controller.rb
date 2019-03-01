@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :find_car, only: %i[create]
 
   def index
-     @bookings = policy_scope(Booking).all
+    @bookings = policy_scope(Booking).all
   end
 
   def b_index_user
@@ -21,7 +21,6 @@ class BookingsController < ApplicationController
     #@bookings = policy_scope(Booking).where(car_id: 12)
   end
 
-
   def create
     @booking = Booking.new(booking_params)
     @booking.car = @car
@@ -29,7 +28,7 @@ class BookingsController < ApplicationController
     @booking.bk_price = @car.price
     authorize @booking
     if @booking.save
-      redirect_to @car
+      redirect_to bookings_path
     else
       flash[:alert] = @booking.errors.full_messages.join(', ')
       redirect_to @car

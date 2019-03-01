@@ -69,7 +69,7 @@
           <div class="rating overall">
             <% sum_rat = @car.ratings.sum(:rt_fun) + @car.ratings.sum(:rt_condition) + @car.ratings.sum(:rt_performance) + @car.ratings.sum(:rt_owner) %>
             <% count_rat = @car.ratings.count %>
-            <% rat_calc = (sum_rat / (count_rat * 4).to_f).ceil %>
+            <% rat_calc = (sum_rat / (count_rat * 4).to_f).round(0) %>
 
             <p>
               <% (rat_calc).times do %><i class="fas fa-circle fa-xs"></i><% end %><% (5 - rat_calc).times do %><i class="far fa-circle fa-xs"></i><% end %>
@@ -106,7 +106,19 @@
               <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End", disabled: true  %>
             </div>
             <div id="total-price"><strong></strong></div>
-            <%= f.button :submit, "Already booked!", class: "btn-secondary", disabled: true %>
+            <%= f.button :submit, "Already Booked", class: "btn-secondary", disabled: true %>
+
+
+          <% elsif @car.owner == current_user %>
+
+            <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory', label: 'Purpose', disabled: true %>
+            <div class="inline">
+              <%= f.input :bk_start, as: :string, input_html: {class: "booking-date"}, label: "Start", disabled: true %>
+              <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End", disabled: true  %>
+            </div>
+            <div id="total-price"><strong></strong></div>
+            <%= f.button :submit, "Your Car", class: "btn-secondary", disabled: true %>
+
 
           <% else %>
 
@@ -116,7 +128,7 @@
               <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End"  %>
             </div>
             <div id="total-price"><strong></strong></div>
-            <%= f.button :submit, "Book now!", class: "btn-primary" %>
+            <%= f.button :submit, "Book Now", class: "btn-primary" %>
 
           <% end %>
         <% end %>
@@ -131,35 +143,32 @@
 
 <!-- *************** INJECTED CAR TABLE ********* -->
 
-<div class="container">
-
-
+<div class="container div-car-bookings">
 
 <!-- *************** INJECTED CONTROLLER KIND ***************************** -->
 
-   <% @bookings = policy_scope(Booking).where(car_id: @car) %>
+   <% @bookings = policy_scope(Booking).where(car_id: @car).order('bk_start DESC') %>
      <% if (@car.owner == current_user) %>
-     <h6 style="text-align:center"><%= @car.brand %>'s dream car rides..</h6>
-
+     <!-- <h6 style="text-align:center"><%#= @car.brand %>'s dream car rides..</h6> -->
 
 <!-- *************** TABLEAU ***************************** -->
   <% i = 0 %>
-      <% sum = 0 %>
-      <% days = 0 %>
-      <% sdays = 0 %>
+  <% sum = 0 %>
+  <% days = 0 %>
+  <% sdays = 0 %>
 
   <% @bookings.each do |booking| %>
     <% i += 1 %>
     <% days = (booking.bk_end - booking.bk_start).to_i %>
     <% sdays += days %>
     <% sum += days * booking.car.price %>
-    <% end %>
+  <% end %>
 
-   <tr>
+   <tr class="dash">
     <p style="text-align:center">
       <td> Rentals: <strong><%= i %></strong> | </td>
       <td> Days: <strong><%= sdays %></strong> | </td>
-      <td> Revenues: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong> | </td>
+      <td> Revenues: <strong><%=number_to_currency((sum), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%></strong></td>
     </p>
    </tr>
 
@@ -171,43 +180,54 @@
       <ul class="flex-container flex-start table-header">
         <li class="car-flex-item col-1"></li>
         <li class="car-flex-item col-2">Driver</li>
-       <!--  <li class="car-flex-item col-3">Owner</li> -->
         <li class="car-flex-item col-3">Purpose</li>
-        <li class="car-flex-item col-4">End Date</li>
+        <li class="car-flex-item col-4">Start Date</li>
         <li class="car-flex-item col-4">Days</li>
-        <li class="car-flex-item col-5">Total cost</li>
+        <li class="car-flex-item col-5">Price</li>
         <li class="car-flex-item col-6">Rating</li>
-         <li class="car-flex-item col-7">Review</li>
+        <!-- <li class="car-flex-item col-7">Review</li> -->
       </ul>
 
-        <% @bookings.each do |booking| %>
+      <% @bookings.each do |booking| %>
 
-          <ul class="flex-container flex-start table-row">
-        <li class="car-flex-item col-1"><%= image_tag booking.driver.photo %></li>
+      <ul class="flex-container flex-start table-row">
+        <li class="car-flex-item col-1"><%= cl_image_tag booking.driver.photo %></li>
         <li class="car-flex-item col-2"><%= booking.driver.name %></li>
-       <!--     <li class="car_flex-item col-2"><%= booking.car.brand %></li> -->
         <li class="car-flex-item col-3"><%= booking.purpose %></li>
-        <li class="car-flex-item col-3"><%= booking.bk_end %></li>
-
+        <li class="car-flex-item col-4"><%= booking.bk_start %></li>
         <li class="car-flex-item col-4"><%= days = (booking.bk_end - booking.bk_start).to_i %></li>
         <li class="car-flex-item col-5">
           <%=number_to_currency((booking.car.price * days), precision: 0, unit: "€", separator: ",", delimiter: ".", format: "%n %u")%>
         </li>
-        <li>
-          <div class="car-flex-item tbl-rating-holder col-6">
-            <div class="c-rating c-rating--small" data-rating-value="<%= rand(1..5) %>">
-              <button>1</button>
-              <button>2</button>
-              <button>3</button>
-              <button>4</button>
-              <button>5</button>
-            </div>
+        <li class="car-flex-item col-6">
+          <div class="rating">
+            <% sum_rat = booking.ratings.sum(:rt_fun) + booking.ratings.sum(:rt_condition) + booking.ratings.sum(:rt_performance) + booking.ratings.sum(:rt_owner) %>
+            <% count_rat = booking.ratings.count %>
+
+              <% if count_rat.zero? %>
+
+              <% if booking.bk_start <= Date.today %>
+                <p style="color: #18A999; font-weight: bold">Ongoing</p>
+
+              <% else booking.bk_start > Date.today %>
+                <p style="color: #1D84B5; font-weight: bold">Planned</p>
+
+              <% end %>
+
+            <% else %>
+
+              <% rat_calc = (sum_rat / (count_rat * 4).to_f).round(0) %>
+              <p>
+                <% (rat_calc).times do %><i class="fas fa-circle fa-sm" style="margin-top: 0px"></i><% end %><% (5 - rat_calc).times do %><i class="far fa-circle fa-sm"></i><% end %>
+              </p>
+
+            <% end %>
           </div>
         </li>
-        <li class="car-flex-item col-7"><i class="fas fa-file-alt" style="font-size: 30px" onclick="" ="document.getElementById('id01').style.display='block'"></i></li>
-          </ul>
+<!--         <li class="car-flex-item col-7"><i class="fas fa-file-alt" style="font-size: 30px" onclick="" ="document.getElementById('id01').style.display='block'"></i></li> -->
+      </ul>
 
-        <% end %>
+      <% end %>
 
   <% end %>
 

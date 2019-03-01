@@ -1,0 +1,15 @@
+.div-car-bookings {
+  margin-top: 20px;
+  border-top: 1px solid $vk-gray;
+
+  p:first-child {
+    // margin-top: 20px;
+    color: gray;
+  }
+
+  i {
+    color: rgba(0,0,0,0.6);
+    padding: 0 1px;
+    margin: 0;
+  }
+}

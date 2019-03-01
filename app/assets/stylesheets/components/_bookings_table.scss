@@ -25,6 +25,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: $vk-black;
+  font-size: 15px;
 }
 
 .flex-item {
@@ -41,13 +43,13 @@
       width: 70px;
       margin-bottom: 0px;
     }
-  &.col-1{ width: 10%; color:red;}
-  &.col-2{ width: 22%; font-weight: bold;}
-  &.col-3{ width: 18%; }
-  &.col-4{ width: 12%;font-style: italic;}
+  &.col-1{ width: 20%}
+  &.col-2{ width: 15%; font-weight: bold;}
+  &.col-3{ width: 15%; }
+  &.col-4{ width: 15%; }
   &.col-5{ width: 15%;}
-  &.col-6{ width: 100px;}
-  &.col-7{ width: 10%;}
+  &.col-6{ width: 20%}
+  // &.col-7{ width: 10%;}
 }
 
 .tbl-rating-holder {
@@ -124,21 +126,26 @@ ul {
 
 
 
-.c-rating {
-  @include c-rating(toem(30px), button); //clickable
+// .c-rating {
+//   @include c-rating(toem(30px), button); //clickable
 
-  &--small {
-    font-size: 50%
-  }
+//   &--small {
+//     font-size: 50%
+//   }
 
-  &--big {
-    font-size: 150%;
-  }
-}
+//   &--big {
+//     font-size: 150%;
+//   }
+// }
 
 // ******************* CAR SHOW TABLE *****************
 
 .car-flex-item {
+  .rating {
+    p {
+      margin: 0;
+    }
+  }
   //background: tomato;
   padding: 5px 15px;
   // width: 20%;
@@ -155,13 +162,13 @@ ul {
       width: 70px;
       margin-bottom: 0px;
     }
-  &.col-1{ width: 10%; color:red;}
-  &.col-2{ width: 22%; font-weight: bold;}
-  &.col-3{ width: 18%; }
-  &.col-4{ width: 12%;font-style: italic;}
+  &.col-1{ width: 10%}
+  &.col-2{ width: 15%; font-weight: bold;}
+  &.col-3{ width: 15%; }
+  &.col-4{ width: 15%; }
   &.col-5{ width: 15%;}
-  &.col-6{ width: 130px;}
-  &.col-7{ width: 10%;}
+  &.col-6{ width: 20%;}
+  // &.col-7{ width: 10%;}
 }
 
 // ********************* DASH **************************
@@ -205,11 +212,11 @@ ul {
       width: 70px;
       margin-bottom: 0px;
     }
-  &.col-1{ width: 10%; color:red;}
-  &.col-2{ width: 22%; font-weight: bold;}
-  &.col-3{ width: 18%; }
-  &.col-4{ width: 12%;font-style: italic;}
+  &.col-1{ width: 10%}
+  &.col-2{ width: 15%; font-weight: bold;}
+  &.col-3{ width: 15%; }
+  &.col-4{ width: 15%; }
   &.col-5{ width: 15%;}
-  &.col-6{ width: 100px;}
-  &.col-7{ width: 10%;}
+  &.col-6{ width: 20%;}
+  // &.col-7{ width: 10%;}
 }
