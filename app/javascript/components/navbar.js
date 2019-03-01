@@ -1,15 +1,31 @@
-const initUpdateNavbarOnScroll = () => {
- const navbar = document.querySelector(‘.navbar-wagon’);
+// const initUpdateNavbarOnScroll = () => {
+//  const navbar = document.querySelector(‘.navbar-wagon’);
 
- if (navbar) {
-   window.addEventListener(‘scroll’, () => {
-     if (window.scrollY >= 70) {
-       navbar.classList.add(‘navbar-wagon-white’);
-     } else {
-       navbar.classList.remove(‘navbar-wagon-white’);
-     }
-   });
- }
+//  if (navbar) {
+//    window.addEventListener(‘scroll’, () => {
+//      if (window.scrollY >= 70) {
+//        navbar.classList.add(‘navbar-wagon-white’);
+//      } else {
+//        navbar.classList.remove(‘navbar-wagon-white’);
+//      }
+//    });
+//  }
+// };
+
+// export { initUpdateNavbarOnScroll };
+
+
+const initUpdateNavbarOnScroll = () => {
+  const navbar = document.querySelector('.navbar-wagon');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= window.innerHeight) {
+        navbar.classList.add('navbar-wagon-white');
+      } else {
+        navbar.classList.remove('navbar-wagon-white');
+      }
+    });
+  }
 };
 
 export { initUpdateNavbarOnScroll };
