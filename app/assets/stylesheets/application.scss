@@ -1,3 +1,5 @@
+//=require flatpickr/dist/flatpickr.min
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -9,25 +11,50 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+
 // Your CSS partials
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+@import "pages/login";
+
 
 
 //
-
 body {
-  background-color: linear-gradient(rgba(0,0,0,0.8), rgba(128,128,128,0.9));
+  background-color: white;
   font-family: $body-font;
+  letter-spacing: 1px;
+}
+
+.wrapper {
+  min-height: calc(100vh - 200px);
 }
 
 .btn-primary {
   background-color: $vk-orange;
   border: none;
   border-radius: 5px;
+  padding: 10px 20px;
 
   &:hover{
     background-color: $vk-red;
   }
+}
+
+.btn-secondary {
+  background-color: $vk-gray;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+
+  &:hover{
+    background-color: $vk-red;
+  }
+}
+
+form {
+  font-family: $body-font;
+  font-size: 14px;
+  font-color: $vk-black;
 }

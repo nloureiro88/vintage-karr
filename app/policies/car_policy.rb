@@ -9,6 +9,14 @@ class CarPolicy < ApplicationPolicy
     true
   end
 
+  def garage?
+    true
+  end
+
+  def hide?
+    record.owner == user # || user.admin?
+  end
+
   def show?
     true
   end

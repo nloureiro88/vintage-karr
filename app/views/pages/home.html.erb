@@ -1,17 +1,16 @@
   <div id="banner">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-offset-6 col-xs-6">
-          <h1>Welcome to Vintage Karr</h1>
-          <br>
-          <p>Rent-a-Karr from the best collection of Hollywood's most famous cars and <br>vehicles in the universe!</p>
-          <br>
-          <%= link_to cars_path do  %>
-          <button class="btn btn-primary btn-lg">Find your KARR</button>
-          <% end %>
-        </div>
-        <div class="col-xs-6"></div>
-      </div>
+    <div class="video-wrapper">
+      <%= video_tag "kittkarr.mp4", autoplay: true, loop: true, muted: true, style: "min-height: 100vh; min-width: 100vw;" %>
+          <div class="banner-content">
+            <h1>Welcome to Vintage Karr</h1>
+            <br>
+            <p>Rent-a-Karr from the best collection of Hollywood's <br>most famous cars and vehicles in the universe!</p>
+
+            <br>
+            <%= link_to cars_path do  %>
+            <button class="btn btn-primary btn-lg">Find your KARR</button>
+            <% end %>
+          </div>
     </div>
   </div>
   <div class="blue-bg padded">
@@ -20,13 +19,10 @@
         <div class="col-xs-12 col-sm-6 col-md-3">
           <div class="home-card">
             <%= image_tag('karr.png') %>
-      <!--       <i class="fas fa-car"></i> -->
 
-
-            <!-- <img src="../"> -->
 
             <h2>KARR</h2>
-            <p>KARR is the name of a automated vehicle featured as a major antagonist of KITT.</p>
+            <p>KARR is the name of a automated vehicle featured as a major antagonist of KITT</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -34,7 +30,7 @@
             <!-- <img src="../shared/images/.svg"> -->
             <%= image_tag('kitt.png') %>
             <h2>KITT</h2>
-            <p>KITT is the short name of two characters from the TV series Knight Rider.</p>
+            <p>KITT is the short name of two characters from the TV series Knight Rider</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -42,7 +38,7 @@
             <!-- <img src="../shared/images/.svg"> -->
             <%= image_tag('bttf_delorean.png') %>
             <h2>DeLorean Time Machine</h2>
-            <p>The DeLorean time machine is a automobile-based time travel vehicle.</p>
+            <p>The DeLorean time machine is a automobile-based time travel vehicle</p>
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -50,18 +46,18 @@
             <!-- <img src="../shared/images/.svg"> -->
             <%= image_tag('batmobile.png') %>
             <h2>Batmobile</h2>
-            <p>The Batmobile is a heavily armored, weaponized vehicle..</p>
+            <p>The Batmobile is a heavily armored, weaponized vehicle</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center padded">
+  <div class="text-center padded newsletter">
     <h2>Subscribe to the Vintage Karr newsletter</h2>
     <p>Leave us your mail and get our latest news</p>
     <form class="form-inline">
       <input type="email" placeholder="name@email.com" class="form-control">
-      <input type="submit" value="Subscribe" class="btn btn-primary">
+      <input type="submit" value="Subscribe" class="subscribe-btn btn-primary">
     </form>
   </div>
 

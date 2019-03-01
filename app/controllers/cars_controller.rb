@@ -2,7 +2,25 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update]
 
   def index
-    @cars = policy_scope(Car).all
+    if params[:query].present?
+      @cars = policy_scope(Car).where(for_rental: true).order(:brand).global_search(params[:query])
+    else
+      @cars = policy_scope(Car).where(for_rental: true).order(:brand)
+    end
+    @cars = @cars.reject { |car| car.owner == current_user }
+  end
+
+  def garage
+    authorize Car
+    @cars = policy_scope(Car).where(owner: current_user).order(:brand)
+  end
+
+  def rental_toggle
+    authorize @car
+    @car.for_rental = !@car.for_rental
+    @car.save
+
+    redirect_to garage_cars_path
   end
 
   def show
