@@ -2,6 +2,9 @@ import "bootstrap";
 
 import flatpickr from 'flatpickr'
 
+import { initUpdateNavbarOnScroll } from '../components/navbar';
+initUpdateNavbarOnScroll();
+
 // import { initUpdateNavbarOnScroll } from '../components/navbar'
 // initUpdateNavbarOnScroll();
 
