@@ -7,4 +7,12 @@ Rails.application.routes.draw do
   end
   resources :bookings, only: [:index]
   resources :ratings, only: [:new, :create]
+
+  # get 'bookings/', to: 'bookings#index'
+  # get 'bookings/cars/:id/:car_id', to: 'bookings#b_index_car'
+  # get 'bookings/:user_id' to: 'bookings#b_index_user'
+  # get 'bookings/:owner_id/' to: 'bookings#b_index_owner'
+  # # get 'photos/:id/:user_id', to: 'photos#show'
+
+
 end
