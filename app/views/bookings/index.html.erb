@@ -13,7 +13,7 @@
   <% days = 0 %>
   <% sdays = 0 %>
 
-  <% @bookings.each do |booking| %>
+  <% @bookings.where(driver: current_user).each do |booking| %>
     <% i += 1 %>
     <% days = (booking.bk_end - booking.bk_start).to_i %>
     <% sdays += days %>
@@ -46,7 +46,7 @@
       <!--  <li class="flex-item col-7">Review</li> -->
     </ul>
 
-    <% @bookings.order('bk_start DESC').each do |booking| %>
+    <% @bookings.where(driver: current_user).order('bk_start DESC').each do |booking| %>
 
     <ul class="flex-container flex-start table-row">
       <li class="flex-item col-1">

@@ -70,16 +70,19 @@ end
 # Create random bookings
 puts "Creating random bookings..."
 
+st_date = Date.new(2018,7,24)
 User.all.each do |driver_user|
-  3.times do
-    car = Car.all.sample
+  days = rand(5..30)
+  6.times do
+    car = Car.all.select { |car| car.owner != driver_user}.sample
     Booking.create!(car: car, #random car
                    driver: driver_user,
                    purpose: PURPOSES[rand(0..PURPOSES.length - 1)],
                    status: "created", # to be changed for bookings
-                   bk_start: Date.new(2019,2,24), # to be changed for bookings
-                   bk_end: Date.new(2019,3,15), # to be changed for bookings
+                   bk_start: st_date, # to be changed for bookings
+                   bk_end: st_date + days , # to be changed for bookings
                    bk_price: car.price)
+    st_date = st_date + days + 1
   end
 end
 
@@ -87,7 +90,7 @@ end
 # to be changed for ratings
 puts "Creating ratings for bookings..."
 
-Booking.all.each do |bk|
+Booking.all.select {|booking| booking.bk_end < Date.today }.each do |bk|
   Rating.create!(booking: bk,
                  rt_fun: rand(1..5),
                  rt_condition: rand(1..5),
