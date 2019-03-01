@@ -11,8 +11,7 @@
       <div class="card-container col-xs-12 col-sm-6 col-md-4">
         <div class="car-card">
 
-          <% bkstyle = car.for_rental ? "" : "car-sepia" %>
-          <div class="car-background #{bkstyle}" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
+          <div class="car-background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
 
 
             <div class="car-card-header">
@@ -50,7 +49,11 @@
             </div>
             <p class="garage-actions">
               <i class="fas fa-edit fa-lg"><a href="#"></a></i>
-              <i class="fas fa-shield-alt fa-lg"><a href=<%= "#{car.id}/toggle" %>></a></i>
+              <% if car.for_rental %>
+                <i class="fas fa-check-circle fa-lg"><a href=<%= "#{car.id}/toggle" %>></a></i>
+              <% else %>
+                <i class="fas fa-ban fa-lg" style="color: red"><a href=<%= "#{car.id}/toggle" %>></a></i>
+              <% end %>
             </p>
           </div>
 
