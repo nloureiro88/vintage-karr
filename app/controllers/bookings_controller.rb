@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to @car
     else
+      flash[:alert] = @booking.errors.full_messages.join(', ')
       redirect_to @car
     end
   end
