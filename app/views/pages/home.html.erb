@@ -11,7 +11,7 @@
 <%= form_tag cars_path, class: "homepage-search-form", method: :get do %>
       <%= text_field_tag :query,
         params[:query],
-        class: "form-control",
+        class: "form-control home-form",
         placeholder: "Find a Karr by brand, model, owner or location"
       %>
       <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
