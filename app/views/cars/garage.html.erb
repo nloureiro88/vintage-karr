@@ -2,7 +2,7 @@
 
   <div class="row garage-buttons">
     <%= link_to "Add Car", new_car_path, class: "btn btn-primary" %>
-    <%= link_to "Show Bookings", bookings_path, class: "btn btn-primary" %>
+    <%= link_to "Show Bookings", garage_bookings_bookings_path, class: "btn btn-primary" %>
   </div>
 
   <div class="row">
@@ -11,7 +11,10 @@
       <div class="card-container col-xs-12 col-sm-6 col-md-4">
         <div class="car-card">
 
-          <div class="car-background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
+          <% bkstyle = car.for_rental ? "" : "car-sepia" %>
+          <div class="car-background #{bkstyle}" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url(<%= car.car_photo %>); background-size: cover; background-repeat: no-repeat; background-position: center; height: 150px">
+
+
             <div class="car-card-header">
               <h3><%= car.brand %></h3>
               <p><%= car.model %></p>

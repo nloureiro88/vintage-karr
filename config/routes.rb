@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
     resources :bookings, only: [:create, :destroy]
   end
-  resources :bookings, only: [:index]
+  resources :bookings, only: [:index] do
+    collection do
+      get 'garage_bookings', to: "bookings#garage_bookings"
+    end
+  end
   resources :ratings, only: [:new, :create]
-
-
 end

@@ -98,18 +98,7 @@
       <div class="booking-form col-xs-12 col-sm-12 col-md-4">
         <%= simple_form_for [@car, @booking] do |f| %>
 
-          <% if @car.bookings.where("status = ? AND bk_start >= ?", "active", Date.today).count.positive? %>
-
-            <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory', label: 'Purpose', disabled: true %>
-            <div class="inline">
-              <%= f.input :bk_start, as: :string, input_html: {class: "booking-date"}, label: "Start", disabled: true %>
-              <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End", disabled: true  %>
-            </div>
-            <div id="total-price"><strong></strong></div>
-            <%= f.button :submit, "Already Booked", class: "btn-secondary", disabled: true %>
-
-
-          <% elsif @car.owner == current_user %>
+          <% if @car.owner == current_user %>
 
             <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory', label: 'Purpose', disabled: true %>
             <div class="inline">
@@ -119,6 +108,15 @@
             <div id="total-price"><strong></strong></div>
             <%= f.button :submit, "Your Car", class: "btn-secondary", disabled: true %>
 
+          <% elsif @car.bookings.where("status = ? AND bk_start >= ?", "active", Date.today).count.positive? %>
+
+            <%= f.input :purpose, collection: ["Competition", "Showing", "Tourism", "Wedding", "Other Event"], placeholder: 'Booking purpose', label: false, error: 'Purpose is mandatory', label: 'Purpose', disabled: true %>
+            <div class="inline">
+              <%= f.input :bk_start, as: :string, input_html: {class: "booking-date"}, label: "Start", disabled: true %>
+              <%= f.input :bk_end, as: :string, input_html: {class: "booking-date"}, label: "End", disabled: true  %>
+            </div>
+            <div id="total-price"><strong></strong></div>
+            <%= f.button :submit, "Already Booked", class: "btn-secondary", disabled: true %>
 
           <% else %>
 

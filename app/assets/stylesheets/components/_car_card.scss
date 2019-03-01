@@ -61,6 +61,10 @@
   border-radius: 5px 5px 0 0;
 }
 
+.car-sepia {
+  filter: sepia(100%);
+}
+
 .car-background .car-card-header {
   position: absolute;
   top: -5px;

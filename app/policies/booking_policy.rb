@@ -9,6 +9,10 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
+  def garage_bookings?
+    true
+  end
+
   def create?
     true
   end
