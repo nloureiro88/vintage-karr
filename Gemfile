@@ -13,7 +13,7 @@ gem 'redis'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'devise'
 gem 'cloudinary', '~> 1.9.1'
-gem 'carrierwave', '~> 1.2'
+gem 'carrierwave', '~> 1.3'
 gem 'nokogiri'
 gem "pundit"
 gem "pg_search"
